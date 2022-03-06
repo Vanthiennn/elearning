@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import './scss/index.scss';
+import React,{Suspense} from "react";
+import { BrowserRouter , Route, Switch } from "react-router-dom";
+import PageNotFound from "containers/PageNotFound";
+import {renderRoutesHome,renderRoutesAdmin} from "./routes"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   <Suspense>
+     <BrowserRouter>
+      <Switch>
+        {renderRoutesHome()}
+        {renderRoutesAdmin()}
+
+        <Route exact path="" component={PageNotFound}/>
+      </Switch>
+     </BrowserRouter>
+   </Suspense> 
+  )
 }
 
 export default App;
