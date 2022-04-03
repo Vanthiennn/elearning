@@ -1,7 +1,7 @@
-import './scss/index.scss';
+import "./scss/index.scss"
 import React,{Suspense} from "react";
 import { BrowserRouter , Route, Switch } from "react-router-dom";
-import PageNotFound from "containers/PageNotFound";
+import PageNotFound from "pages/PageNotFound";
 import {renderRoutesHome,renderRoutesAdmin} from "./routes"
 
 function App() {
