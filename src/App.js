@@ -6,7 +6,7 @@ import {renderRoutesHome,renderRoutesAdmin} from "./routes"
 
 function App() {
   return (
-   <Suspense>
+   <Suspense fallback>
      <BrowserRouter>
       <Switch>
         {renderRoutesHome()}

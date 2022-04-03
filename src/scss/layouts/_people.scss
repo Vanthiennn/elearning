@@ -1,0 +1,45 @@
+.people {
+    padding: 100px 50px;
+    & .slick-prev::before,.slick-next::before {
+        font-size: 50px;
+        color: #aeacac;
+    }
+    & .content {
+        color: #9a9999;
+        line-height: 25px;
+        margin: 10px 20px;
+        & span {
+            font-size: $fs-3;
+            margin: 0 5px;
+        }
+    }
+    & .slick-dots {
+        left: 0;
+        li {
+            margin-right: 20px!important;
+            margin-left: 20px;
+            cursor: default!important;
+            & img {  
+                opacity: 0.5;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-top: 50px;
+            }
+            &.slick-active img {
+                transform: scale(1.5);
+                transition: .3s ease;
+                opacity: 1;
+            }
+    }
+    
+    }
+}
+
+
+
+@media screen and (max-width:768px) {
+    .slick-arrow ,.slick-prev{
+        display: none!important
+    }
+}

@@ -1,0 +1,246 @@
+import React, { Fragment, useState } from "react";
+import { NavLink, useLocation, useHistory } from "react-router-dom";
+import { Space } from "antd";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
+import _ from "lodash";
+
+export default function Navbar() {
+  const [isNavOpen, setNavOpen] = useState(true);
+  let location = useLocation();
+  const { userLogin } = useSelector((state) => state.loginReducer);
+  const listCart = useSelector((state) => state.listCartReducer.listCart);
+  const history = useHistory();
+
+  const totalCart = () => {
+    return listCart.reduce((total, item) => {
+      return (total += item.fee);
+    }, 0);
+  };
+
+  const renderCart = () => {
+    return listCart.map((item, index) => {
+      return (
+        <Fragment key={index}>
+          <div
+            className="d-flex my-4"
+            style={{ cursor: "pointer" }}
+            onClick={(e) => {
+              e.preventDefault();
+              history.push(`/detail/${item.maKhoaHoc}?${item.fee}`);
+              window.location.reload();
+            }}
+          >
+            <img src={item.hinhAnh} alt="" style={{ width: 100, height: 100 }} />
+            <div
+              style={{ marginLeft: 12, lineHeight: "10px", fontWeight: 700 }}
+            >
+              <h5 style={{ fontWeight: 700 }}>{item.tenKhoaHoc}</h5>
+              <p style={{ color: "#6a6f73", fontWeight: 400 }}>
+                {item.danhMucKhoaHoc?.tenDanhMucKhoaHoc}
+              </p>
+              <p>${item.fee}</p>
+            </div>
+          </div>
+          <hr />
+        </Fragment>
+      );
+    });
+  };
+
+  const renderLogin = () => {
+    if (_.isEmpty(userLogin)) {
+      return (
+        <Fragment>
+          <button
+            onClick={() => {
+              history.push("/login");
+            }}
+            className="buttonBlue mx-3 text-white"
+          >
+            Sign In
+          </button>
+          <button
+            onClick={() => {
+              history.push("/register");
+            }}
+            className="buttonPink text-white"
+          >
+            Register
+          </button>
+        </Fragment>
+      );
+    }
+    return (
+      <Fragment>
+        <button
+          onClick={() => {
+            history.push("/profile");
+          }}
+          className="buttonBlue mx-3 text-white"
+        >
+          {userLogin.taiKhoan}
+        </button>
+        <button
+          onClick={() => {
+            localStorage.removeItem("UserHome");
+            history.push("/");
+            window.location.reload();
+          }}
+          className="buttonPink text-white"
+        >
+          Log Out
+        </button>
+      </Fragment>
+    );
+  };
+  return (
+    <>
+      <div
+        className={isNavOpen ? "mainNavbar" : "mainNavbar2"}
+        style={{ backgroundColor: location.pathname === "/" ? "" : "#84cc8e" }}
+      >
+        <nav className="navbar navbar-expand-md navbar-light ">
+          <NavLink
+            exact
+            activeClassName="active"
+            className="nav-link nav-logo"
+            to="/"
+          >
+            <img
+              src="/img/logo.png"
+              alt="/img/logo.png"
+              className="img-fluid"
+              style={{ width: 200 }}
+            />
+          </NavLink>
+          {/* Responsive cart and button  */}
+          <div className="cartNav cartNavRes">
+          <Space
+              className="cartIcon"
+              onClick={(e) => {
+                e.preventDefault();
+                history.push("/my-cart");
+                window.location.reload();
+              }}
+            >
+              <ShoppingCartOutlined />
+            </Space>
+            <span className="cartNum">{listCart.length}</span>
+            <div className="listCart px-3 mobile">
+              {listCart.length === 0 ? (
+                <div className="no-course">
+                  There are no courses in the cart
+                </div>
+              ) : (
+                <Fragment>
+                  {renderCart()}
+                  <div
+                    className="total"
+                    style={{ fontWeight: 700, fontSize: 20 }}
+                  >
+                    TOTAL: ${totalCart()}{" "}
+                  </div>
+                </Fragment>
+              )}
+            </div>
+          </div>
+          {/* Toggler/collapsibe Button */}
+          <div className="toggleResponsive bg-white">
+            <button
+              className={isNavOpen ? "toggle" : "clicked"}
+              type="button"
+              data-toggle="collapse"
+              data-target="#collapsibleNavbar"
+              onClick={() => {
+                setNavOpen(!isNavOpen);
+              }}
+            >
+              <span className="toggle_line toggle_line1"></span>
+              <span className="toggle_line toggle_line2"></span>
+              <span className="toggle_line toggle_line3"></span>
+            </button>
+          </div>
+
+          {/* Navbar links */}
+          <div
+            className="collapse navbar-collapse justify-content-center mt-3"
+            id="collapsibleNavbar"
+          >
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <NavLink
+                  activeClassName="active"
+                  className="nav-link textNav textNavRes "
+                  to="/login"
+                >
+                  SIGN IN
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  activeClassName="active"
+                  className="nav-link textNav textNavRes "
+                  to="/register"
+                >
+                  REGISTER
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  activeClassName="active"
+                  className="nav-link textNav "
+                  to="/"
+                >
+                  HOME
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  activeClassName="active"
+                  className="nav-link textNav"
+                  to="/courses/all"
+                >
+                  COURSE
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+
+          <div className="cartNav cartWeb">
+            <Space
+              className="cartIcon"
+              onClick={(e) => {
+                e.preventDefault();
+                history.push("/my-cart");
+                window.location.reload();
+              }}
+            >
+              <ShoppingCartOutlined />
+            </Space>
+            <span className="cartNum">{listCart.length}</span>
+            <div className="listCart px-3">
+              {listCart.length === 0 ? (
+                <div className="no-course">
+                  There are no courses in the cart
+                </div>
+              ) : (
+                <Fragment>
+                  {renderCart()}
+                  <div
+                    className="total"
+                    style={{ fontWeight: 700, fontSize: 20 }}
+                  >
+                    TOTAL: ${totalCart()}{" "}
+                  </div>
+                </Fragment>
+              )}
+            </div>
+          </div>
+
+          <div style={{ display: "flex" }}>{renderLogin()}</div>
+        </nav>
+      </div>
+    </>
+  );
+}

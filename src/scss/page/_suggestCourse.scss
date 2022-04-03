@@ -1,0 +1,58 @@
+.owl-carousel.owl-theme {
+    position: relative;
+    & .owl-stage-outer {
+      padding-bottom: 150px;
+      & .suggest-image {
+        & .name-courses {
+          text-align: center;
+        }
+      }
+      & .main-content {
+        & .relative {
+          & .info-courses {
+            & .teacher {
+              &  img {
+                display: inline-block;
+              }
+              & p {
+                text-align: center;
+                padding-left: 28px;
+              }
+            }
+          }
+        }
+        & .show-info {
+          padding-right: 10px;
+          height: 300px;
+          & span::before,
+          span::after {
+            display: none;
+          }
+          & .description {
+            line-height: 15px;
+          }
+          & .button-show-info {
+            flex-wrap: wrap;
+          }
+        }
+      }
+    }
+    & .owl-nav {
+      position: absolute;
+      top: 28%;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      & .disabled {
+        opacity: 0;
+        }
+      & button.owl-prev , button.owl-next {
+        padding: 10px 20px!important;
+        background-color: $color-pink;
+        color: black!important;
+      }
+    }
+    & .owl-dots {
+      margin-top: 40px;
+    }
+  }
