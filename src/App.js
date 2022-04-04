@@ -3,16 +3,17 @@ import React,{Suspense} from "react";
 import { BrowserRouter , Route, Switch } from "react-router-dom";
 import PageNotFound from "pages/PageNotFound";
 import {renderRoutesHome,renderRoutesAdmin} from "./routes"
+import AuthPage from "pages/Admin/components/AuthPage";
 
 function App() {
   return (
-   <Suspense fallback>
+   <Suspense fallback={<div>Loading... </div>}>
      <BrowserRouter>
       <Switch>
         {renderRoutesHome()}
         {renderRoutesAdmin()}
-
-        <Route exact path="" component={PageNotFound}/>
+        <Route path="/auth" component={AuthPage}/>
+        <Route path="" component={PageNotFound}/>
       </Switch>
      </BrowserRouter>
    </Suspense> 

@@ -1,0 +1,3 @@
+export const GET_INFO_COURSE_REQUEST = "@infocourse/GET_INFO_COURSE_REQUEST";
+export const GET_INFO_COURSE_SUCCESS = "@infocourse/GET_INFO_COURSE_SUCCESS";
+export const GET_INFO_COURSE_FAILED = "@infocourse/GET_INFO_COURSE_FAILED";
