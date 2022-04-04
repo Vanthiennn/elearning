@@ -1,9 +1,9 @@
-import './scss/index.scss';
+import "./scss/index.scss"
 import React,{Suspense} from "react";
 import { BrowserRouter , Route, Switch } from "react-router-dom";
-import PageNotFound from "containers/PageNotFound";
+import PageNotFound from "pages/PageNotFound";
 import {renderRoutesHome,renderRoutesAdmin} from "./routes"
-import AuthPage from 'containers/AdminTemplate/AuthPage';
+import AuthPage from "pages/Admin/components/AuthPage";
 
 function App() {
   return (

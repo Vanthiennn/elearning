@@ -1,28 +1,10 @@
-// Helper
-@import "./helper/mixin";
-@import "./helper/variable";
-
 // Base
 @import "./base/reset";
 
 // Components
+@import "./components/button";
+@import "./components/pagination";
 
-
-
-// layouts
-@import "./layouts/header";
-@import "./layouts/carousel";
-@import "./layouts/content";
-@import "./layouts/footer";
-
-// auth
-@import "./auth/auth";
-@import "./auth/util";
-
-
-// admin
-@import "./admin/navbarAdmin";
-
-
-// pageNotFound
-@import "./pageNotFound/pageNotFound";
+// Helper
+@import "./helper/mixin";
+@import "./helper/variable";

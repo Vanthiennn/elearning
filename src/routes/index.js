@@ -1,96 +1,132 @@
-import HomeTemplate from "containers/HomeTemplate";
-import AdminTemplate from "containers/AdminTemplate";
-
+import Home from "pages/Home";
+import Admin from "pages/Admin";
 import { lazy } from "react";
 
 const routesHome = [
     {
-        exact: true,
-        path: "/",
-        component: lazy(() => import("../containers/HomeTemplate/HomePage/index.js"))
-    }
+        exact:true,
+        path:"/",
+        component:lazy(() => import("pages/Home/components/HomePage"))
+    },
+    {
+        exact:false,
+        path:"/detail/:maKhoaHoc",
+        component:lazy(() => import("pages/Home/components/DetailCourse"))
+    },
+    {
+        exact:false,
+        path:"/category/:maDanhMuc",
+        component:lazy(() => import("pages/Home/components/DetailCategory"))
+    },
+    {
+        exact:false,
+        path:"/courses/all",
+        component:lazy(() => import("pages/Home/components/AllCourse")),
+    },
+    {
+        exact:false,
+        path:"/login",
+        component:lazy(() => import("components/Login")),
+    },
+    {
+        exact:false,
+        path:"/register",
+        component:lazy(() => import("pages/Home/components/Register")),
+    },
+    {
+        exact:false,
+        path:"/my-cart",
+        component:lazy(() => import("pages/Home/components/MyCart")),
+    },
+    {
+        exact:false,
+        path:"/profile",
+        component:lazy(() => import("pages/Home/components/Profile")),
+    },
+
+
 ]
 
 const routesAdmin = [
     {
         exact: false,
         path: "/admin/course-list/approval/:idCourse",
-        component: lazy(() => import("../containers/AdminTemplate/ApprovalPage"))
+        component: lazy(() => import("pages/Admin/components/ApprovalPage"))
     },
     {
         exact: false,
         path: "/admin/course-list/unsubscribe/:idCourse",
-        component: lazy(() => import("../containers/AdminTemplate/UnsubscribeByCoursePage"))
+        component: lazy(() => import("pages/Admin/components/UnsubscribeByCoursePage"))
     },
     {
         exact: false,
         path: "/admin/course-list/subscribe/:idCourse",
-        component: lazy(() => import("../containers/AdminTemplate/SubscribeByCoursePage"))
+        component: lazy(() => import("pages/Admin/components/SubscribeByCoursePage"))
     },
     {
         exact: false,
         path: "/admin/course-list/edit-course/:courseCode",
-        component: lazy(() => import("../containers/AdminTemplate/EditCoursePage"))
+        component: lazy(() => import("pages/Admin/components/EditCoursePage"))
     },
     {
         exact: false,
         path: "/admin/course-list/add-course",
-        component: lazy(() => import("../containers/AdminTemplate/AddCoursePage"))
+        component: lazy(() => import("pages/Admin/components/AddCoursePage"))
     },
     {
         exact: false,
         path: "/admin/course-list",
-        component: lazy(() => import("../containers/AdminTemplate/CoursePage"))
+        component: lazy(() => import("pages/Admin/components/CoursePage"))
     },
     // ------------------------------------------------------------------
     {
         exact: false,
         path: "/admin/user-list/approval/:account",
-        component: lazy(() => import("../containers/AdminTemplate/ApprovalCoursePage"))
+        component: lazy(() => import("pages/Admin/components/ApprovalCoursePage"))
     },
     {
         exact: false,
         path: "/admin/user-list/unsubscribe/:account",
-        component: lazy(() => import("../containers/AdminTemplate/UnsubscribeByUserPage"))
+        component: lazy(() => import("pages/Admin/components/UnsubscribeByUserPage"))
     },
     {
         exact: false,
         path: "/admin/user-list/subscribe/:account",
-        component: lazy(() => import("../containers/AdminTemplate/SubscribeByUserPage")),
+        component: lazy(() => import("pages/Admin/components/SubscribeByUserPage")),
     },
     {
         exact: false,
         path: "/admin/user-list/edit-user/:account",
-        component: lazy(() => import("../containers/AdminTemplate/EditUserPage"))
+        component: lazy(() => import("pages/Admin/components/EditUserPage"))
     },
     {
         exact: false,
         path: "/admin/user-list/add-user",
-        component: lazy(() => import("../containers/AdminTemplate/AddUserPage")),
+        component: lazy(() => import("pages/Admin/components/AddUserPage")),
     },
     {
         exact: false,
         path: "/admin/user-list/page:number",
-        component: lazy(() => import("../containers/AdminTemplate/UserPage"))
+        component: lazy(() => import("pages/Admin/components/UserPage"))
     },
     // ------------------------------------------------------------------
     {
         exact: false,
         path: "/admin",
-        component: lazy(() => import("../containers/AdminTemplate/DashboardPage"))
+        component: lazy(() => import("pages/Admin/components/DashboardPage"))
     },
     
 ]
 
 const renderRoutesHome = () => {
-    return routesHome.map((route, index) => {
-        return <HomeTemplate key={index} exact={route.exact} path={route.path} component={route.component} />
+    return routesHome.map((route,index) => {
+        return <Home key={index} exact={route.exact} path={route.path} component={route.component}/>
     })
 }
 
 const renderRoutesAdmin = () => {
-    return routesAdmin.map((route, index) => {
-        return <AdminTemplate key={index} exact={route.exact} path={route.path} component={route.component} breabcrumbs={route.breabcrumbs} />
+    return routesAdmin.map((route,index) => {
+        return <Admin key={index} exact={route.exact} path={route.path} component={route.component}/>
     })
 }
 
