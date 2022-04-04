@@ -24,6 +24,14 @@ apiAdmin.interceptors.request.use((config) => {
     return config
 })
 
-export {apiHome,apiAdmin}
+const groupID = {
+    maNhom: "GP05"
+}
+
+export {apiHome, apiAdmin, groupID}
+
+
+
+
 
 

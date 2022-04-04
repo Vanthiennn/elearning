@@ -1,0 +1,5 @@
+export const LIST_USER_UNSUBS_REQUEST = "@useunsubs/LIST_USER_UNSUBS_REQUEST";
+export const LIST_USER_UNSUBS_SUCCESS = "@useunsubs/LIST_USER_UNSUBS_SUCCESS";
+export const LIST_USER_UNSUBS_FAILED = "@useunsubs/LIST_USER_UNSUBS_FAILED";
+
+export const GET_KEYWORD = "@search/GET_KEYWORD";

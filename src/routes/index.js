@@ -47,7 +47,76 @@ const routesHome = [
 
 ]
 
-const routesAdmin = []
+const routesAdmin = [
+    {
+        exact: false,
+        path: "/admin/course-list/approval/:idCourse",
+        component: lazy(() => import("pages/Admin/components/ApprovalPage"))
+    },
+    {
+        exact: false,
+        path: "/admin/course-list/unsubscribe/:idCourse",
+        component: lazy(() => import("pages/Admin/components/UnsubscribeByCoursePage"))
+    },
+    {
+        exact: false,
+        path: "/admin/course-list/subscribe/:idCourse",
+        component: lazy(() => import("pages/Admin/components/SubscribeByCoursePage"))
+    },
+    {
+        exact: false,
+        path: "/admin/course-list/edit-course/:courseCode",
+        component: lazy(() => import("pages/Admin/components/EditCoursePage"))
+    },
+    {
+        exact: false,
+        path: "/admin/course-list/add-course",
+        component: lazy(() => import("pages/Admin/components/AddCoursePage"))
+    },
+    {
+        exact: false,
+        path: "/admin/course-list",
+        component: lazy(() => import("pages/Admin/components/CoursePage"))
+    },
+    // ------------------------------------------------------------------
+    {
+        exact: false,
+        path: "/admin/user-list/approval/:account",
+        component: lazy(() => import("pages/Admin/components/ApprovalCoursePage"))
+    },
+    {
+        exact: false,
+        path: "/admin/user-list/unsubscribe/:account",
+        component: lazy(() => import("pages/Admin/components/UnsubscribeByUserPage"))
+    },
+    {
+        exact: false,
+        path: "/admin/user-list/subscribe/:account",
+        component: lazy(() => import("pages/Admin/components/SubscribeByUserPage")),
+    },
+    {
+        exact: false,
+        path: "/admin/user-list/edit-user/:account",
+        component: lazy(() => import("pages/Admin/components/EditUserPage"))
+    },
+    {
+        exact: false,
+        path: "/admin/user-list/add-user",
+        component: lazy(() => import("pages/Admin/components/AddUserPage")),
+    },
+    {
+        exact: false,
+        path: "/admin/user-list/page:number",
+        component: lazy(() => import("pages/Admin/components/UserPage"))
+    },
+    // ------------------------------------------------------------------
+    {
+        exact: false,
+        path: "/admin",
+        component: lazy(() => import("pages/Admin/components/DashboardPage"))
+    },
+    
+]
 
 const renderRoutesHome = () => {
     return routesHome.map((route,index) => {
@@ -61,4 +130,4 @@ const renderRoutesAdmin = () => {
     })
 }
 
-export {renderRoutesHome , renderRoutesAdmin}
+export { renderRoutesHome, renderRoutesAdmin }
