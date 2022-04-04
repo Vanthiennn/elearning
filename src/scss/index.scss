@@ -14,3 +14,15 @@
 @import "./layouts/carousel";
 @import "./layouts/content";
 @import "./layouts/footer";
+
+// auth
+@import "./auth/auth";
+@import "./auth/util";
+
+
+// admin
+@import "./admin/navbarAdmin";
+
+
+// pageNotFound
+@import "./pageNotFound/pageNotFound";

@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "antd/dist/antd.css" ;
 import './index.css';
-import "./scss/index.scss"
+import "./scss/index.scss";
+import 'react-toastify/dist/ReactToastify.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "jquery/dist/jquery.min.js" ;

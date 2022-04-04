@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
+import { Route } from 'react-router-dom';
 
-export default function HomeTemplate() {
+export default function HomeTemplate({ exact, path, component }) {
   return (
-    <div>HomeTemplate</div>
+    <Route exact={exact} path={path} component={component} />
   )
 }
