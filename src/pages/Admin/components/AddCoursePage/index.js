@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCourseCatalog } from '../../../../store/courseAdmin/actions';
 import { actListUserAdmin } from '../../../../store/userAdmin/actions';
 import moment from 'moment';
-import { actAddCourseAdmin } from '../../../../store/modules/actions';
+import { actAddCourseAdmin } from '../../../../store/addCourseAdmin/actions';
 import { groupID } from 'utils/apiUtils';
 
 const AddCoursePage = (props) => {

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Route } from "react-router-dom";
 import { Redirect } from "react-router-dom";
+import "./style.scss"
 
 import { Layout, Menu } from 'antd';
 import {
@@ -11,7 +12,6 @@ import {
 import { Link } from "react-router-dom";
 import HeaderAdmin from "./components/_component/HeaderAdmin";
 import CustomBreadcrumb from "./components/_component/Breadcrumb";
-import { useSelector } from "react-redux";
 
 const { Content, Footer, Sider } = Layout;
 

@@ -21,7 +21,7 @@ import authReducer from "./auth";
 import userListWaitApprovalReducer from "./approvalUser";
 import courseListWaitApprovalReducer from "./approvalCourse";
 import addUserReducer from "./addUserAdmin";
-import addCourseReducer from "./modules/reducer";
+import addCourseReducer from "store/addCourseAdmin";
 
 const rootReducer = combineReducers({
   categoryReducer,
@@ -46,7 +46,6 @@ const rootReducer = combineReducers({
   courseListWaitApprovalReducer,
   addUserReducer,
   addCourseReducer,
-  
 });
 
 export default rootReducer;

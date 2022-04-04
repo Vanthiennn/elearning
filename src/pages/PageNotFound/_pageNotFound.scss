@@ -23,16 +23,14 @@ $nunito-font: "Nunito", sans-serif;
     }
 }
 
-html {
-    height: 100%;
-}
 
-body {
+.pageNotFound {
     background-image: url("https://assets.codepen.io/1538474/star.svg"), linear-gradient(to bottom, #05007a, #4d007d);
     height: 100%;
     margin: 0;
     background-attachment: fixed;
     overflow: hidden;
+    padding-bottom: 70px;
 }
 
 .mars {

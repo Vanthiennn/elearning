@@ -12,8 +12,6 @@ function UserPage(props) {
   const [searchInput, setSearchInput] = useState('');
   const [filteredResults, setFilteredResults] = useState([]);
 
-  console.log(data?.currentPage);
-
   const dispatch = useDispatch();
 
   const columns = [
@@ -52,7 +50,7 @@ function UserPage(props) {
     },
     {
       title: 'Phone Number',
-      dataIndex: 'soDt',
+      dataIndex: 'soDT',
       width: "10%",
     },
     {
@@ -149,6 +147,7 @@ function UserPage(props) {
   };
 
   const handleOnchange = (page, pageSize) => {
+    
     dispatch(actListUserAdmin(page))
   }
 
