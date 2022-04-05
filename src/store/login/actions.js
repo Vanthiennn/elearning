@@ -9,7 +9,7 @@ export const actLogin = (user, history) => {
         .post("QuanLyNguoiDung/DangNhap", user)
         .then((result) => {
           localStorage.setItem("UserHome", JSON.stringify(result.data));
-          history.push("/");
+          history.goBack();
           dispatch(actLoginSuccess(result.data));
         })
         .catch((error) => {

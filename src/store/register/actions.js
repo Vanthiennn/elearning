@@ -7,7 +7,6 @@ export const actRegister = (user, history) => {
     apiHome
       .post("QuanLyNguoiDung/DangKy", user)
       .then((result) => {
-        console.log(result.data);
         localStorage.setItem("UserHome", JSON.stringify(result.data));
         dispatch(actRegisterSuccess(result.data));
         history.push("/");

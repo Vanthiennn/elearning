@@ -7,7 +7,6 @@ import allCourseReducer from "./allCourse";
 import loginReducer from "./login";
 import registerReducer from "./register";
 import detailCategoryReducer from "./detailCategory";
-import listCartReducer from "./listCart";
 import profileUserReducer from "./profileUser";
 import userListAdminReducer from "./userAdmin";
 import courseListRegisteredReducer from "./unsubscribeByUser";
@@ -17,6 +16,7 @@ import userListUnsubsReducer from "./subscribeByCourse";
 import editUserReducer from "./editUserAdmin";
 import editCourseAdminReducer from "./editCourseAdmin";
 import listCourseReducer from "./courseAdmin";
+import cartReducer from "./cart";
 import authReducer from "./auth";
 import userListWaitApprovalReducer from "./approvalUser";
 import courseListWaitApprovalReducer from "./approvalCourse";
@@ -31,7 +31,6 @@ const rootReducer = combineReducers({
   allCourseReducer,
   loginReducer,
   registerReducer,
-  listCartReducer,
   profileUserReducer,
   userListAdminReducer,
   courseListRegisteredReducer,
@@ -45,7 +44,8 @@ const rootReducer = combineReducers({
   userListWaitApprovalReducer,
   courseListWaitApprovalReducer,
   addUserReducer,
-  addCourseReducer,
+  cartReducer,
+  addCourseReducer
 });
 
 export default rootReducer;

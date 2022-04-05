@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actListCoursesApi } from "store/listCourses/actions";
+import { addToCart as actAddToCarting } from "store/cart/actions"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGraduationCap,
@@ -27,12 +28,36 @@ export default function SuggestCourse(props) {
   const listCourses = useSelector(
     (state) => state.listCoursesReducer.listCourses
     );
+    const cartItems = useSelector((state) => state.cartReducer.cartItems);
+  
     const dispatch = useDispatch();
     useEffect(() => {
     dispatch(actListCoursesApi());
   }, []);
+
+  const addToCart = (item) => {
+    dispatch(actAddToCarting(item))
+  }
+
+  const renderAddToCart = (items) => {
+    return cartItems.findIndex((item) => {
+      return  item.maKhoaHoc === items.maKhoaHoc    ;
+    }) === -1 ? (
+      <button className="add-cart" onClick={(e) => {
+        e.preventDefault()
+        addToCart(items)
+      }}>
+        Add To Cart
+      </button>
+    ) : (
+      <NavLink className="add-cart go-cart" to="/my-cart">
+        Go To Cart
+      </NavLink>
+    );
+  };
+
   const renderSuggestCourse = () => {
-    return listCourses.slice(2, listCourses.length - 1).map((item, index) => {
+    return listCourses.map((item, index) => {
       return (
         <div key={index} className="item-course  mt-3 mb-0">
           <div className="suggest-image">
@@ -55,7 +80,7 @@ export default function SuggestCourse(props) {
                   <img
                     src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"
                     alt="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"
-                    style={{ width: 25, height: 25 }}
+                    style={{ width: 25, height: 25,display:"inline-block" }}
                   />
                   <label>Teacher</label>
                   <p>{item.nguoiTao.hoTen}</p>
@@ -105,9 +130,7 @@ export default function SuggestCourse(props) {
                 >
                   Detail
                 </NavLink>
-                <NavLink className="add-cart" to="/abc">
-                  Add to cart
-                </NavLink>
+               {renderAddToCart(item)}
               </div>
             </div>
           </div>
@@ -128,10 +151,10 @@ export default function SuggestCourse(props) {
         nav: true,
       },
       600: {
-        items: 3,
+        items:2,
         nav: false,
       },
-      1000: {
+      1200: {
         items: 4,
         nav: true,
         loop: false,

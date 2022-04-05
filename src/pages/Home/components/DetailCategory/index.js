@@ -10,22 +10,46 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import Categories from "../HomePage/categories";
-import "./style.scss"
+import { addToCart as actAddToCarting } from "store/cart/actions";
+import "./style.scss";
 export default function DetailCategory(props) {
   const detailCate = useSelector(
     (state) => state.detailCategoryReducer.detailCate
   );
+  const cartItems = useSelector((state) => state.cartReducer.cartItems);
   const dispatch = useDispatch();
   useEffect(() => {
-    let { maDanhMuc } = props.match.params;
+    const { maDanhMuc } = props.match.params;
     dispatch(actDetailCateApi(maDanhMuc));
-    
   }, []);
+
+  const addToCart = (item) => {
+    dispatch(actAddToCarting(item));
+  };
+
+  const renderAddToCart = (items) => {
+    return cartItems.findIndex((item) => {
+      return item.maKhoaHoc === items.maKhoaHoc;
+    }) === -1 ? (
+      <button
+        className="add-cart"
+        onClick={() => {
+          addToCart(items);
+        }}
+      >
+        Add To Cart
+      </button>
+    ) : (
+      <NavLink className="add-cart go-cart" to="/my-cart">
+        Go To Cart
+      </NavLink>
+    );
+  };
 
   const renderDetailCate = () => {
     return detailCate.map((item, index) => {
       return (
-        <div className="item-course col-sm-12 col-md-4 mt-5 " key={index}>    
+        <div className="item-course col-sm-12 col-md-4 mt-5 " key={index}>
           <div className="wallpaper">
             <img src={item.hinhAnh} alt={item.hinhAnh} />
             <div className="overlay"></div>
@@ -80,7 +104,7 @@ export default function DetailCategory(props) {
                 {item.luotXem} | <FontAwesomeIcon icon={faGraduationCap} />
                 {item.soLuongHocVien} | <FontAwesomeIcon icon={faHeart} /> 99{" "}
               </span>
-              <p className="description mt-3">{item.moTa.slice(0, 30)}...</p>
+              <p className="description mt-3" style={{width:200,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{item.moTa}</p>
               <div className="button-show-info">
                 <NavLink
                   className="detail"
@@ -88,9 +112,7 @@ export default function DetailCategory(props) {
                 >
                   Detail
                 </NavLink>
-                <NavLink className="add-cart" to="/my-cart">
-                  Add to cart
-                </NavLink>
+               {renderAddToCart(item)}
               </div>
             </div>
           </div>
@@ -100,8 +122,11 @@ export default function DetailCategory(props) {
   };
   return (
     <div style={{ paddingTop: 130, paddingBottom: 130 }}>
-      <Categories/>     
-       <h3 className="text-center">Category: {detailCate && detailCate[0]?.danhMucKhoaHoc?.tenDanhMucKhoaHoc}</h3>
+      <Categories />
+      <h3 className="text-center">
+        Category:{" "}
+        {detailCate && detailCate[0]?.danhMucKhoaHoc?.tenDanhMucKhoaHoc}
+      </h3>
       <div className="my-5">
         <div className="container">
           <div className="row">{renderDetailCate()}</div>

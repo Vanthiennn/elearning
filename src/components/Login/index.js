@@ -30,8 +30,6 @@ export default function Login(props) {
     const noti = () => {
       return error && <div className='alert alert-danger'>{error.response.data}</div>
     }
-  
-  
       return <div className='loginUser'>
                 <div className="container">
               <div className="d-flex justify-content-center h-100">

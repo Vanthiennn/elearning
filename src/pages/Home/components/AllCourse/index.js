@@ -1,8 +1,3 @@
-import React, { Fragment, useEffect, useState } from "react";
-import "./style.scss"
-import { useSelector, useDispatch } from "react-redux";
-import { NavLink} from "react-router-dom";
-import SuggestCourse from "components/SuggestCourse";
 import { Menu, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,11 +7,20 @@ import {
   faHeart,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
+import React, { Fragment, useEffect, useState } from "react";
+import "./style.scss"
+import { useSelector, useDispatch } from "react-redux";
+import { NavLink} from "react-router-dom";
+import SuggestCourse from "components/SuggestCourse";
+
+
 import { actAllCourse, applyFilter } from "store/allCourse/actions";
+import { addToCart as actAddToCarting } from "store/cart/actions"
 
 export default function AllCourse(props) { 
   const allCourse = useSelector((state) => state.allCourseReducer.allCourse);
-  
+  const infoUser = useSelector((state) => state.profileUserReducer.infoUser);
+  const cartItems = useSelector((state) => state.cartReducer.cartItems);
   const [currentPage, changeCurrentPage] = useState(1);
   const [keyWord, setKeyWord] = useState({
     key: "",
@@ -35,11 +39,49 @@ export default function AllCourse(props) {
     });
   };
 
+  const addToCart = (item) => {
+    dispatch(actAddToCarting(item))
+  }
+
+  const renderAddToCart = (items) => {
+    return cartItems.findIndex((item) => {
+      return  item.maKhoaHoc === items.maKhoaHoc    ;
+    }) === -1 ? (
+      <button className="add-cart" onClick={() => {
+        addToCart(items)
+      }}>
+        Add To Cart
+      </button>
+    ) : (
+      <NavLink className="add-cart go-cart" to="/my-cart">
+        Go To Cart
+      </NavLink>
+    );
+  };
+  const handleAddToCart = (items) => {
+  	return infoUser ? (
+  		infoUser.chiTietKhoaHocGhiDanh?.findIndex(item => {
+  			return item.maKhoaHoc === items.maKhoaHoc;
+  		}) === -1 ? (
+  			renderAddToCart(items)
+  		) : (
+  			<NavLink className="add-cart go-profile" to="/profile">
+  				Go to profile
+  			</NavLink>
+  		)
+  	) : (
+  		renderAddToCart(items)
+  	);
+  };
+
   const renderCoursePage = () => {
     let { items: course } = allCourse
-    let { key } = keyWord;
+    const { key } = keyWord;
+    const lowerCaseKey = key.toLowerCase()
     course = course.filter((item) => {
-      return item.tenKhoaHoc.toLowerCase().indexOf(key.toLowerCase()) !== -1;
+      const lowerCaseKhoaHoc = item.tenKhoaHoc.toLowerCase()
+      const indexOfLowerCaseKhoaHoc = lowerCaseKhoaHoc.indexOf(lowerCaseKey)
+      return indexOfLowerCaseKhoaHoc !== -1;
     });
     return course.map((item, index) => {
       return (
@@ -53,10 +95,10 @@ export default function AllCourse(props) {
                 <div className="info-teacher-course">
                   <img
                     src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"
-                    alt="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"
+                    alt="image of admin"
                     style={{ width: 25, height: 25 }}
                   />
-                  <p>{item.nguoiTao.hoTen.slice(0, 15)}</p>
+                  <p style={{width:50,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{item.nguoiTao.hoTen}</p>
                 </div>
                 <div className="name-course w-75">
                   <p>{item.tenKhoaHoc}</p>
@@ -96,9 +138,7 @@ export default function AllCourse(props) {
                   >
                     Detail
                   </NavLink>
-                  <NavLink className="add-cart" to="/my-cart">
-                    Add to cart
-                  </NavLink>
+                  {handleAddToCart(item)}
                 </div>
               </div>
             </div>
@@ -165,7 +205,7 @@ export default function AllCourse(props) {
         <div className="image-course"></div>
         <div className="title-course">
           <h3 className="text-white">Our Course</h3>
-          <NavLink to="/">Home /</NavLink>
+          <NavLink to="/">Home </NavLink> <span className="text-muted">/</span>
           <NavLink to="/courses/all"> Our Course</NavLink>
         </div>
       </div>
@@ -184,9 +224,7 @@ export default function AllCourse(props) {
         <div className="search">
           <input
             placeholder="Searching course"
-            onChange={(event) => {
-              handleOnChange(event);
-            }}
+            onChange={handleOnChange}
           />
           <button type="submit">
             <FontAwesomeIcon icon={faSearch} />

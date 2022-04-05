@@ -43,6 +43,9 @@
             color: white;
             font-size: 15px;
           }
+          & p {
+            color: #ccc;
+          }
         }
       }
     }
@@ -55,38 +58,19 @@
       transform: translateX(-50%);
       & .relative {
         border: 1px solid;
-        padding: 10px;
+        padding: 30px 10px;
         box-shadow: 5px 10px 8px #888888;
         z-index: 2;
         height: 150px;
         background: white;
         overflow: hidden;
-        &::before {
-          content: "";
-          display: inline-block;
-          height: 3px;
-          position: relative;
-          vertical-align: middle;
-          width: 107%;
-          background: black;
-          bottom: -124px;
-          left: -11px;
-        }
-        &::after {
-          border-left: 10px solid transparent;
-          border-right: 10px solid transparent;
-          border-bottom: 10px solid #000000;
-          content: "";
-          top: 137px;
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-        }
         & .status-courses {
           background: green;
-          width: 15%;
+          width: 16%;
+          padding-left: 6px;
           border-radius: 10px;
           color: white;
+          font-weight: 600;
         }
         & .info-courses {
           margin-top: 5px;
@@ -133,14 +117,19 @@
         border-radius: 0 0 10px 10px;
         overflow: hidden;
         padding-right: 10px;
-        height: 300px;
+        height: 270px;
+        & .teacher {
+          img{
+            display: inline-block!important;
+          }
+        }
         & p,
         h4,
         label,
         span,
         .fee {
           margin-left: 5px;
-          margin-bottom: 10px;
+          margin-bottom: 0;
           color: white;
         }
         h4 {
@@ -153,10 +142,7 @@
           font-size: 20px; //$fs-2;
           line-height: 25px;
         }
-        & span::before,
-        span::after {
-          display: none;
-        }
+       
         & .description {
           line-height: 15px;
         }
@@ -171,14 +157,19 @@
             border-radius: 10px;
             margin-top: 10px;
             color: black;
+            font-weight: 700;
           }
           & .add-cart {
-            padding: 10px 20px;
+            padding: 18px 6px;
             background: #227df9;
             border-radius: 10px;
             margin-top: 10px;
             color: white;
             border: none;
+          }
+          & .go-cart {
+            background-color: black;
+            font-weight: 600;
           }
         }
       }

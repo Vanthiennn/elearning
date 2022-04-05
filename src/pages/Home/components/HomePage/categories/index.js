@@ -15,7 +15,7 @@ export default function Categories() {
     if (data) {
       return data.map((item, index) => {
         return (
-          <NavLink  className="item-category col-sm-4 col-md-2 mt-2 " to={`/category/${item.maDanhMuc}`} onClick={(e) => {
+          <NavLink  className="item-category col-sm-4  col-md-2 mt-2 " to={`/category/${item.maDanhMuc}`} onClick={(e) => {
             e.preventDefault();
             history.push(`/category/${item.maDanhMuc}`);
             window.location.reload();
@@ -42,7 +42,7 @@ export default function Categories() {
     dispatch(actCategoryApi());
   }, []);
   return (
-    <div style={{overflow:"hidden"}}>
+    <div style={{overflow:"hidden"}} id="category">
       <div className="categories text-center" data-aos="fade-left" data-aos-duration="2000">
       <div className="wallpaper">
         <img src="/img/bg-3.png" alt="/img/bg-3.png" />

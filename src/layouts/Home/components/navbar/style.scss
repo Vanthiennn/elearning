@@ -1,139 +1,142 @@
 .mainNavbar {
-    position: absolute;
-    width: 100%;
-    z-index: 999;
-    background-color: rgba(0, 0, 0, 0.1);
+  position: absolute;
+  width: 100%;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.mainNavbar2 {
+  background-color: wheat;
+  position: absolute;
+  width: 100%;
+  z-index: 999;
+}
+
+.navbar {
+  // @include styleWidth($wd-2, $mg-2, $mg-2);
+  width: 90%;
+  margin: auto;
+  .textNav {
+    // @include styleText($color-white !important, $fs-1, $fw-3);
+    color: white !important;
+    font-size: 15px;
+    font-weight: 600;
   }
-  
-  .mainNavbar2 {
-    background-color: wheat;
-    position: absolute;
-    width: 100%;
-    z-index: 999;
+
+  .nav-link:hover {
+    color: #227df9 !important; //$color-blue
   }
-  
-  .navbar {
-    // @include styleWidth($wd-2, $mg-2, $mg-2);
-    width: 90%;
-    margin: auto;
-    .textNav {
-      // @include styleText($color-white !important, $fs-1, $fw-3);
-      color: white!important;
-      font-size: 15px;
-      font-weight: 600;
+  .toggle,
+  .clicked {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background-color: #dcdcdc;
+    border: none;
+  }
+  .toggle_line {
+    position: absolute;
+    left: 9px;
+    width: 22px;
+    height: 2px;
+    background-color: #333333;
+  }
+  .toggle_line1 {
+    top: 11px;
+    transition: all 0.3s;
+  }
+  .toggle_line2 {
+    top: 18px;
+  }
+  .toggle_line3 {
+    top: 25px;
+    transition: all 0.3s;
+  }
+
+  .clicked .toggle_line1 {
+    transform: rotate(45deg);
+    top: 20px;
+  }
+  .clicked .toggle_line2 {
+    width: 0px;
+  }
+  .clicked .toggle_line3 {
+    transform: rotate(-45deg);
+    top: 20px;
+  }
+
+  .cartNav {
+    position: relative;
+    background-color: black; //$color-dark-1;
+    border-radius: 50%;
+    margin-right: 20px;
+    padding: 4px 8px;
+    color: white; //$color-white;
+    &:hover .listCart {
+      display: block;
     }
-  
-    .nav-link:hover {
-      color: #227df9!important; //$color-blue 
-    }
-    .toggle,
-    .clicked {
-      position: relative;
-      width: 40px;
-      height: 40px;
+    .cartIcon {
+      font-size: 20px; //$fs-2;
+      line-height: 20px;
       cursor: pointer;
-      background-color: #dcdcdc;
-      border: none;
     }
-    .toggle_line {
+
+    .cartNum {
       position: absolute;
-      left: 9px;
-      width: 22px;
-      height: 2px;
-      background-color: #333333;
-    }
-    .toggle_line1 {
-      top: 11px;
-      transition: all 0.3s;
-    }
-    .toggle_line2 {
-      top: 18px;
-    }
-    .toggle_line3 {
-      top: 25px;
-      transition: all 0.3s;
-    }
-  
-    .clicked .toggle_line1 {
-      transform: rotate(45deg);
-      top: 20px;
-    }
-    .clicked .toggle_line2 {
-      width: 0px;
-    }
-    .clicked .toggle_line3 {
-      transform: rotate(-45deg);
-      top: 20px;
-    }
-  
-    .cartNav {
-      position: relative;
-      background-color: black ;//$color-dark-1;
+      top: -7px;
+      color: white; //$color-white;
+      background: red;
       border-radius: 50%;
-      margin-right: 20px;
-      padding: 4px 8px;
-      color:white; //$color-white;
-      &:hover .listCart {
-        display: block;
-      }
-      .cartIcon {
-        font-size:20px; //$fs-2;
-        line-height: 20px;
-        cursor: pointer;
-      }
-  
-      .cartNum {
-        position: absolute;
-        top: -7px;
-        color:white; //$color-white;
-        background: red;
-        border-radius: 50%;
-        padding: 1px 7px;
-        right: -11px;
-        font-size: 13px;
-      }
-  
-      .listCart {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        width: 300px;
-        background: white;
-        color:black;
-        padding-bottom: 20px;
-        transition: all 5s ;
-        display:none;
-        box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.08);
+      padding: 1px 7px;
+      right: -11px;
+      font-size: 13px;
+    }
+
+    .listCart {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 300px;
+      background: white;
+      color: black;
+      padding-bottom: 20px;
+      transition: all 5s;
+      display: none;
+      box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.08);
       z-index: 1000;
-        
-      }
-      .mobile {
-        left: 50%;
-        transform: translateX(-50%);
-      }
-    }
-  }
-  
-  // @include mediaQuery("medium-down")
-  @media screen and (max-width:767.98px){
-    .navbar {
-      & img {
-        width: 100px !important;
+      .no-course {
+       padding: 10px;
+       font-weight: 600;
+       text-align: center;
       }
     }
-    .cartWeb,
-    .buttonBlue,
-    .buttonPink {
-      display: none;
+    .mobile {
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
-  
-  @media screen and (min-width: 768px) {
-    .toggle,
-    .cartNavRes,
-    .buttonNavRes,
-    .textNavRes {
-      display: none;
+}
+
+// @include mediaQuery("medium-down")
+@media screen and (max-width: 767.98px) {
+  .navbar {
+    & img {
+      width: 100px !important;
     }
   }
-  
+  .cartWeb,
+  .buttonBlue,
+  .buttonPink {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .toggle,
+  .cartNavRes,
+  .buttonNavRes,
+  .textNavRes {
+    display: none;
+  }
+}

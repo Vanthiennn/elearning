@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./style.scss"
+import "./style.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { actListCoursesApi } from "store/listCourses/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,23 +8,26 @@ import {
   faEye,
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
+
+import { addToCart as actAddToCarting } from "store/cart/actions";
 import { NavLink } from "react-router-dom";
-import Swal from "sweetalert2";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { actAddToCart } from "store/listCart/actions";
+
 AOS.init();
 
 export default function Courses(props) {
-  const listCart = useSelector((state) => state.listCartReducer.listCart);
+  const cartItems = useSelector((state) => state.cartReducer.cartItems);
+  const infoUser = useSelector((state) => state.profileUserReducer.infoUser);
   const [isHeartActive, setHeartActive] = useState(false);
   const listCourses = useSelector(
     (state) => state.listCoursesReducer.listCourses
   );
+
   // set state để hiển thị ra 3 item trước khi click button Show more
   const [showMore, setShowMore] = useState({
     listCourses: [...listCourses],
-    itemsToShow: 5,
+    itemsToShow: 3,
     expanded: false,
   });
 
@@ -34,63 +37,44 @@ export default function Courses(props) {
     dispatch(actListCoursesApi());
   }, []);
 
-  const scrollUp = () => {
-    window.scroll({
-      top: 850,
-      left: 0,
-      behavior: "smooth",
-    });
+  const addToCart = (item) => {
+    dispatch(actAddToCarting(item));
   };
 
-
-
-  const addToCart = () => {
-    localStorage.getItem("UserHome")
-      ? dispatch(actAddToCart(listCart))
-      : Swal.fire({
-          position: "center",
-          icon: "error",
-          html: `<h3 style="color:#f27474"><b>ERROR!</b></h3><b>Please LOG IN TO CONTINUE </b>`,
-          showConfirmButton: false,
-          timer: 1500,
-        });
-  };
-  const renderAddToCart = () => {
-    return listCart.findIndex((item) => {
-      return item.maKhoaHoc === listCourses.maKhoaHoc;
+  const renderAddToCart = (items) => {
+    return cartItems.findIndex((item) => {
+      return item.maKhoaHoc === items.maKhoaHoc;
     }) === -1 ? (
-      <button className="add-cart" onClick={() => {
-        addToCart()
-      }}>
+      <button
+        className="add-cart"
+        onClick={() => {
+          addToCart(items);
+        }}
+      >
         Add To Cart
       </button>
     ) : (
-      <NavLink className="add-cart" to="/my-cart">
+      <NavLink className="add-cart go-cart" to="/my-cart">
         Go To Cart
       </NavLink>
     );
   };
-  console.log(listCart);
-  // const handleAddToCart = () => {
-  // 	return courseOfUser ? (
-  // 		courseOfUser.findIndex(item => {
-  // 			return item.maKhoaHoc === course.maKhoaHoc;
-  // 		}) === -1 ? (
-  // 			renderAddToCart()
-  // 		) : (
-  // 			<NavLink className="btn--black btnn" to="/home/profile">
-  // 				TỚI HỒ SƠ CÁ NHÂN
-  // 			</NavLink>
-  // 		)
-  // 	) : (
-  // 		renderAddToCart()
-  // 	);
-  // };
+  const handleAddToCart = (items) => {
+    return infoUser.chiTietKhoaHocGhiDanh?.findIndex((item) => {
+      return item.maKhoaHoc === items.maKhoaHoc;
+    }) === -1 ? (
+      renderAddToCart(items)
+    ) : (
+      <NavLink className="add-cart go-profile" to="/profile">
+        Go to profile
+      </NavLink>
+    );
+  };
 
   const renderListCourses = () => {
-    return listCourses.slice(2, showMore.itemsToShow).map((item, index) => {
+    return listCourses.slice(0, showMore.itemsToShow).map((item, index) => {
       return (
-        <div className="item-course col-sm-12 col-md-4 mt-5 " key={index}>
+        <div className="item-course col-sm-12   col-lg-4 mt-5 " key={index}>
           <div className="wallpaper">
             <img src={item?.hinhAnh} alt={item?.hinhAnh} />
             <div className="overlay"></div>
@@ -145,7 +129,17 @@ export default function Courses(props) {
                 {item.luotXem} | <FontAwesomeIcon icon={faGraduationCap} />
                 {item.soLuongHocVien} | <FontAwesomeIcon icon={faHeart} /> 99{" "}
               </span>
-              <p className="description mt-3">{item.moTa.slice(0, 30)}...</p>
+              <p
+                className="description mt-3"
+                style={{
+                  width: 200,
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {item.moTa}
+              </p>
               <div className="button-show-info">
                 <NavLink
                   className="detail"
@@ -153,12 +147,7 @@ export default function Courses(props) {
                 >
                   Detail
                 </NavLink>
-                {/* <button className="add-cart" onClick={() => {
-                 
-                }}>
-                  Add To Cart
-                </button> */}
-                {renderAddToCart(item.maKhoaHoc)}
+                {handleAddToCart(item)}
                 <div
                   className={isHeartActive ? "heart is-active" : "heart "}
                   onClick={() => {
@@ -193,9 +182,9 @@ export default function Courses(props) {
             className="buttonBlue d-inline-block mr-3"
             id="loadMore"
             onClick={() => {
-              showMore.itemsToShow === 5
-                ? setShowMore({ itemsToShow: 8, expanded: true })
-                : setShowMore({ itemsToShow: 5, expanded: false }, scrollUp());
+              showMore.itemsToShow === 3
+                ? setShowMore({ itemsToShow: 6, expanded: true })
+                : setShowMore({ itemsToShow: 3, expanded: false });
             }}
           >
             {showMore.expanded ? (
