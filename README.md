@@ -3,4 +3,4 @@
 - File phân chia công việc : 
 + Trần Văn Thiên : trang Home
 + Nguyễn Đình Quân : Trang Admin và trang PageNotFound
-- Link youtube:
+- Link youtube: https://www.youtube.com/watch?v=MGtrycSQwdU
