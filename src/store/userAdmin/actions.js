@@ -35,13 +35,13 @@ export const actListUserAdmin = () => {
     }
 }
 
-export const actDeleteUserAdmin = (user) => {
+export const actDeleteUserAdmin = (user, history) => {
     return (dispatch) => {
         apiAdmin
             .delete(`QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${user}`)
             .then((result) => {
                 alert(`Delete success ${user} !`);
-                dispatch(actListUserAdmin());
+                window.location.reload();
             })
             .catch((error) => {
                 alert(error.response.data);

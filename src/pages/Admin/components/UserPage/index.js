@@ -113,7 +113,7 @@ function UserPage(props) {
         return <>
           <Button onClick={() => {
             if (window.confirm(`Are you sure you want to delete ${user.taiKhoan}?`)) {
-              dispatch(actDeleteUserAdmin(user.taiKhoan));
+              dispatch(actDeleteUserAdmin(user.taiKhoan, props.history));
             }
           }} style={{ border: "none" }} ><DeleteOutlined style={{ fontSize: 20 }} /></Button>
         </>

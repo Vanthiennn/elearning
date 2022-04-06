@@ -1,5 +1,6 @@
 import * as ActionType from "./constants";
 import { apiAdmin } from "utils/apiUtils";
+import { actListUserAdmin } from "store/userAdmin/actions";
 
 const actAddUserRequest = () => {
     return {
@@ -29,7 +30,8 @@ export const actAddUserAdmin = (formData, history) => {
             .then((result) => {
                 dispatch(actAddUserSuccess(result));
                 alert("Success!");
-                history.push("/admin/user-list")
+                history.push("/admin/user-list");
+                dispatch(actListUserAdmin())
             })
             .catch((error) => {
                 console.log(error.response.data);
