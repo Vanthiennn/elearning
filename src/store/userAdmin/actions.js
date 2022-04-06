@@ -21,11 +21,11 @@ const actListUserFailed = (error) => {
     }
 }
 
-export const actListUserAdmin = (pageNumber) => {
+export const actListUserAdmin = () => {
     return (dispatch) => {
         dispatch(actListUserRequest());
         apiAdmin
-            .get(`QuanLyNguoiDung/LayDanhSachNguoiDung_PhanTrang?MaNhom=${groupID.maNhom}&page=${pageNumber}&pageSize=10`)
+            .get(`QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${groupID.maNhom}`)
             .then((result) => {
                 dispatch(actListUserSuccess(result.data))
             })
@@ -41,12 +41,10 @@ export const actDeleteUserAdmin = (user) => {
             .delete(`QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${user}`)
             .then((result) => {
                 alert(`Delete success ${user} !`);
-                
                 dispatch(actListUserAdmin());
             })
             .catch((error) => {
                 alert(error.response.data);
-                dispatch(actListUserAdmin())
             })
     }
 }

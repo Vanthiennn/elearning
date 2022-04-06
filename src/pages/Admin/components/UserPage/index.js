@@ -1,7 +1,7 @@
 import React, { useEffect, useState, memo } from 'react';
-import { Button, Table, Pagination  } from 'antd';
+import { Button, Table, Pagination } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { actChangePageNumber, actDeleteUserAdmin, actListUserAdmin } from '../../../../store/userAdmin/actions';
+import { actDeleteUserAdmin, actListUserAdmin } from '../../../../store/userAdmin/actions';
 import { NavLink } from "react-router-dom"
 import { EditOutlined, DeleteOutlined, UsergroupAddOutlined, UsergroupDeleteOutlined, SafetyCertificateOutlined } from "@ant-design/icons";
 import { Input, Space } from 'antd';
@@ -50,7 +50,7 @@ function UserPage(props) {
     },
     {
       title: 'Phone Number',
-      dataIndex: 'soDT',
+      dataIndex: 'soDt',
       width: "10%",
     },
     {
@@ -93,20 +93,28 @@ function UserPage(props) {
       }
     },
     {
-      title: 'Action',
-      dataIndex: 'action',
+      title: 'Edit',
+      dataIndex: 'Edit',
       align: "center",
-      width: "10%",
+      width: "5%",
       render: (text, user) => {
         return <>
-        <div style={{display: "flex", justifyContent: "center"}}>
-          <NavLink className="mr-3 text-4xl" to={`/admin/user-list/edit-user/${user.taiKhoan}`} ><EditOutlined style={{ color: "blue", fontSize: 20 }} /></NavLink>
+          <NavLink to={`/admin/user-list/edit-user/${user.taiKhoan}`} ><EditOutlined style={{ color: "blue", fontSize: 20 }} /></NavLink>
+        </>
+      }
+    },
+    {
+      title: 'Delete',
+      dataIndex: 'Delete',
+      align: "center",
+      width: "5%",
+      render: (text, user) => {
+        return <>
           <Button onClick={() => {
             if (window.confirm(`Are you sure you want to delete ${user.taiKhoan}?`)) {
               dispatch(actDeleteUserAdmin(user.taiKhoan));
             }
-          }} style={{ border: "none", padding: 0}} ><DeleteOutlined style={{ color: "red", fontSize: 20 }} /></Button>
-        </div>
+          }} style={{ border: "none" }} ><DeleteOutlined style={{ fontSize: 20 }} /></Button>
         </>
       }
     },
@@ -118,7 +126,7 @@ function UserPage(props) {
         return { ...user, key: index }
       })
     } else {
-      return data?.items.map((user, index) => {
+      return data?.map((user, index) => {
         return { ...user, key: index }
       })
     }
@@ -127,34 +135,28 @@ function UserPage(props) {
   const handleChange = (searchValue) => {
     setSearchInput(searchValue)
     if (searchInput !== "") {
-      const filteredData = data?.items.filter((item) => {
+      const filteredData = data?.filter((item) => {
         return Object.values(item.hoTen).join('').toLowerCase().includes(searchInput.toLowerCase())
       })
       setFilteredResults(filteredData)
     } else {
-      setFilteredResults(data?.items)
+      setFilteredResults(data)
     }
   }
 
   const { Search } = Input;
 
   function onChange(pagination, filters, sorter, extra) {
-    console.log(pagination);
   }
 
   const onSearch = value => {
     console.log(value);
   };
 
-  const handleOnchange = (page, pageSize) => {
-    
-    dispatch(actListUserAdmin(page))
-  }
-
 
   useEffect(() => {
     if (data === null) {
-      dispatch(actListUserAdmin(1))
+      dispatch(actListUserAdmin())
     }
   }, []);
 
@@ -165,13 +167,12 @@ function UserPage(props) {
   }
   return (
     <div>
-      <h3 className='mb-3'>User Management</h3>
+      <h2 style={{fontSize: 30}} className='mb-3'>User Management</h2>
       <div className='mb-3' style={{ display: "flex" }}>
         <Button style={{ backgroundColor: "#73d13d" }} className='mr-5 text-white' ><NavLink to="/admin/user-list/add-user">Add User</NavLink></Button>
         <Search placeholder="Search Name" onSearch={onSearch} enterButton onChange={(event) => { handleChange(event.target.value) }} />
       </div>
       <Table columns={columns} dataSource={renderListUser()} onChange={onChange} />
-      <Pagination onChange={handleOnchange} defaultCurrent={data?.currentPage} total={data?.totalCount}/>
     </div>
   )
 }

@@ -182,7 +182,7 @@ const AddUserPage = (props) => {
 
   return (
     <div className='container'>
-      <h3 className='mb-5' style={{ marginLeft: 277 }}>Create a new user account</h3>
+      <h3 className='mb-5' style={{ marginLeft: 375, fontSize: 30 }}>Create a new user account</h3>
       <Form
         labelCol={{
           span: 6,

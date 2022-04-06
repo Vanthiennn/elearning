@@ -1,5 +1,6 @@
 import * as ActionType from "./constants";
 import { apiAdmin } from "utils/apiUtils";
+import { actFetchListCourseAdmin } from "store/courseAdmin/actions";
 
 const actAddCourseRequest = () => {
     return {
@@ -28,8 +29,9 @@ export const actAddCourseAdmin = (formData, history) => {
             .post("QuanLyKhoaHoc/ThemKhoaHocUploadHinh", formData)
             .then((result) => {
                 dispatch(actAddCourseSuccess(result.data));
-                alert("Success!")
-                history.push("/admin/course-list")
+                alert("Success!");
+                history.push("/admin/course-list");
+                dispatch(actFetchListCourseAdmin())
             })
             .catch((error) => {
                 dispatch(actAddCourseFailed(error.response.data))

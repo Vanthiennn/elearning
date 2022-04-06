@@ -30,7 +30,7 @@ export const actEditCourseAdmin = (formData, history) => {
                 history.push("/admin/course-list")
             })
             .catch((error) => {
-                alert(error.response.data);
+                alert(error);
             })
     }
 }

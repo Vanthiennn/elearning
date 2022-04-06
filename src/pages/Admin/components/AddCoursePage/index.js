@@ -95,7 +95,6 @@ const AddCoursePage = (props) => {
       if (key !== "hinhAnh") {
         formData.append(key, newCourse[key])
       } else {
-        console.log(newCourse.hinhAnh);
         formData.append("file", newCourse.hinhAnh, newCourse.hinhAnh.name)
       }
     }
@@ -116,7 +115,7 @@ const AddCoursePage = (props) => {
 
   return (
     <>
-      <h3 className='mb-4' style={{ marginLeft: 268 }}>Create a new course</h3>
+      <h3 className='mb-4' style={{ marginLeft: 268, fontSize: 30 }}>Create a new course</h3>
       <Form
         labelCol={{
           span: 4,

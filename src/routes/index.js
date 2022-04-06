@@ -106,7 +106,7 @@ const routesAdmin = [
     },
     {
         exact: false,
-        path: "/admin/user-list/page:number",
+        path: "/admin/user-list",
         component: lazy(() => import("pages/Admin/components/UserPage"))
     },
     // ------------------------------------------------------------------

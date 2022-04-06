@@ -74,7 +74,6 @@ export default function EditUserPage(props) {
     if(state.matKhau && state.hoTen && state.soDt){
       if(window.confirm(`Do you want to update account ${props.match.params.account} ?`)){
         dispatch(actEditUserAdmin(state, props.history))
-        // console.log(state);
       }
     }
   }

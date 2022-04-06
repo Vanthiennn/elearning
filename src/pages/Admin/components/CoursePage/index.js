@@ -129,20 +129,28 @@ export default function CoursePage(props) {
       }
     },
     {
-      title: 'Action',
-      dataIndex: 'action',
+      title: 'Edit',
+      dataIndex: 'Edit',
       align: "center",
-      width: "10%",
+      width: "5%",
       render: (text, course) => {
         return <>
-        <div style={{display: "flex", justifyContent: "center"}}>
-          <NavLink className="mr-3 text-4xl" to={`/admin/course-list/edit-course/${course.maKhoaHoc}`}><EditOutlined style={{ color: "blue", fontSize: 20 }} /></NavLink>
-          <Button style={{ border: "none", padding: 0 }} onClick={() => {
+          <NavLink to={`/admin/course-list/edit-course/${course.maKhoaHoc}`} ><EditOutlined style={{ color: "blue", fontSize: 20 }} /></NavLink>
+        </>
+      }
+    },
+    {
+      title: 'Delete',
+      dataIndex: 'Delete',
+      align: "center",
+      width: "5%",
+      render: (text, course) => {
+        return <>
+          <Button style={{ border: "none"}} onClick={() => {
             if (window.confirm(`Are you sure you want to delete ${course.tenKhoaHoc}?`)) {
               dispatch(actDeleteCourseAdmin(course.maKhoaHoc))
             }
-          }} ><DeleteOutlined style={{ color: "red", fontSize: 20 }} /></Button>
-        </div>
+          }} ><DeleteOutlined style={{ fontSize: 20 }} /></Button>
         </>
       }
     },
@@ -164,7 +172,7 @@ export default function CoursePage(props) {
   }
   return (
     <div>
-      <h3 className='mb-3'>Course Management</h3>
+      <h2 style={{ fontSize: 30 }} className='mb-3'>Course Management</h2>
       <div className='mb-3' style={{ display: "flex" }}>
         <Button style={{ backgroundColor: "#73d13d" }} className='mr-5 text-white' ><NavLink to="/admin/course-list/add-course">Add Course</NavLink></Button>
         <Search placeholder="Search ID Course" onSearch={onSearch} enterButton="Search" onChange={(event) => { handleChange(event.target.value) }} />

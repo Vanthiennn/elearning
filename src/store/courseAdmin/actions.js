@@ -57,12 +57,10 @@ export const actDeleteCourseAdmin = (course) => {
             .delete(`QuanLyKhoaHoc/XoaKhoaHoc?MaKhoaHoc=${course}`)
             .then((result) => {
                 alert(`Delete success ${course} !`);
-                
                 dispatch(actFetchListCourseAdmin());
             })
             .catch((error) => {
                 alert(error.response.data);
-                dispatch(actFetchListCourseAdmin())
             })
     }
 }

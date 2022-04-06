@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Route } from "react-router-dom";
 import { Redirect } from "react-router-dom";
-import "./style.scss"
+import "./style.scss";
 
 import { Layout, Menu } from 'antd';
 import {
@@ -37,8 +37,8 @@ export default function AdminTemplate(props) {
               <Menu.Item key="/admin" icon={<PieChartOutlined  />}>
                 <Link to="/admin">Dashboard </Link>
               </Menu.Item>
-              <Menu.Item key={`/admin/user-list/page${props.computedMatch.params.number}`} icon={<UserOutlined />}>
-                <Link to={`/admin/user-list/page${props.computedMatch.params.number}`}>User </Link>
+              <Menu.Item key={`/admin/user-list`} icon={<UserOutlined />}>
+                <Link to={`/admin/user-list`}>User </Link>
               </Menu.Item>
               <Menu.Item key="/admin/course-list" icon={<FileOutlined />}>
                 <Link to="/admin/course-list">Courses </Link>
