@@ -227,7 +227,7 @@ export default function AllCourse(props) {
             </button>
           </Dropdown>
         </div>
-        <div className="search">
+        <div className="search-course">
           <input placeholder="Searching course" onChange={handleOnChange} />
           <button type="submit">
             <FontAwesomeIcon icon={faSearch} />

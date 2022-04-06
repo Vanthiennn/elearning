@@ -121,7 +121,7 @@ export default function DetailCourse(props) {
                 </div>
               </div>
               <div className="image-detail-course">
-                <img src={detailCourse.hinhAnh} alt="" />
+                <img src={detailCourse?.hinhAnh} alt="" />
               </div>
             </div>
           </div>
