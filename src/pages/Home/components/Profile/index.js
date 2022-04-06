@@ -174,7 +174,7 @@ export default function Profile() {
               <p className="user-name my-4">{infoUser.taiKhoan}</p>
             </div>
             {/* Nav tabs */}
-            <ul className="nav  container profile-list-menu p-0 justify-content-around mb-5">
+            <ul className="nav  profile-list-menu p-0 justify-content-around mb-5">
               <li className="nav-item w-100 my-3">
                 <a className="nav-link active" data-toggle="tab" href="#home">
                   Infomation User

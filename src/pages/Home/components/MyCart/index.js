@@ -55,7 +55,7 @@ export default function MyCart(props) {
             <div
               className="d-flex w-75 detail-cart"
               onClick={() => {
-                history.push(`/detail/${item.maKhoaHoc}?${item.fee}`);
+                history.push(`/detail/${item.maKhoaHoc}?${state.fee}`);
               }}
             >
               <img

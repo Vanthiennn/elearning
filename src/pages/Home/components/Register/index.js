@@ -3,7 +3,7 @@ import { useDispatch,useSelector} from 'react-redux';
 import { actRegister } from 'store/register/actions';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faGooglePlus,faFacebook,faTwitter} from '@fortawesome/free-brands-svg-icons'
-import "./style.scss"
+import "components/Login/style.scss"
 
 export default function Register(props) {
  
@@ -27,7 +27,6 @@ export default function Register(props) {
       ...state,
       [name] : value
     })
-    console.log(state)
   }
   
 

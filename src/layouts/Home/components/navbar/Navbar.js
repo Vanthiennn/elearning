@@ -1,30 +1,41 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import "./style.scss"
-import React, { Fragment, useState } from "react";
+import React, { Fragment,useEffect, useState } from "react";
 import { NavLink, useLocation, useHistory } from "react-router-dom";
 import { Space } from "antd";
 import { useSelector } from "react-redux";
 import _ from "lodash";
 
 
-export default function Navbar() {
+export default function Navbar(props) {
   const [isNavOpen, setNavOpen] = useState(true);
   let location = useLocation();
+  const [state,setState] = useState({
+    fee:""
+  })
   const { userLogin } = useSelector((state) => state.loginReducer);
-  // const cart = useSelector((state) => state.cartReducer.cartItems);
-  const listCart = useSelector(state => state.cartReducer.cartItems)
+  const cartItems = useSelector(state => state.cartReducer.cartItems)
   const totalQuantity = useSelector(state => state.cartReducer.totalQuantity)
 
   const history = useHistory();
-
+  useEffect(() => {
+    let { search } = location
+    setState({
+      fee:search.slice(1,search.length)
+    })
+  },[])
   const totalCart = () => {
-    return listCart.reduce((total, item) => {
-      return (total += item.fee);
+    return cartItems.reduce((total, item) => {
+      if(location.search === ""){
+        return (total += item.fee);
+      } else {
+        return (total +=state.fee * 1)
+      }
     }, 0);
   };
 
   const renderCart = () => {
-    return listCart.map((item, index) => {
+    return cartItems.map((item, index) => {
       return (
         <Fragment key={index}>
           <div
@@ -32,7 +43,7 @@ export default function Navbar() {
             style={{ cursor: "pointer" }}
             onClick={(e) => {
               e.preventDefault();
-              history.push(`/detail/${item.maKhoaHoc}?${item.fee}`);
+              history.push(`/detail/${item.maKhoaHoc}?${state.fee}`);
               window.location.reload();
             }}
           >
@@ -44,7 +55,7 @@ export default function Navbar() {
               <p style={{ color: "#6a6f73", fontWeight: 400 }}>
                 {item.danhMucKhoaHoc?.tenDanhMucKhoaHoc}
               </p>
-              <p>${item.fee}</p>
+              <p>${location.search === "" ? item.fee : state.fee}</p>
             </div>
           </div>
           <hr />
@@ -124,8 +135,8 @@ export default function Navbar() {
           <Space
               className="cartIcon"
               onClick={(e) => {
-                e.preventDefault();
-                history.push("/my-cart");
+                // e.preventDefault();
+                history.push(`/my-cart?${state.fee}`);
                 window.location.reload();
               }}
             >
@@ -235,7 +246,7 @@ export default function Navbar() {
               className="cartIcon"
               onClick={(e) => {
                 e.preventDefault();
-                history.push("/my-cart");
+                history.push(`/my-cart?${state.fee}`);
                 window.location.reload();
               }}
             >
