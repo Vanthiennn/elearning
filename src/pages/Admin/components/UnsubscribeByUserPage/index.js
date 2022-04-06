@@ -4,12 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import Search from 'antd/lib/transfer/search';
 import { NavLink } from "react-router-dom"
 import { CloseOutlined } from "@ant-design/icons";
-import { actFetchListCourseRegistered, actGetKeyword, actUnsubsCourseAdmin } from '../../../../store/unsubscribeByUser/actions';
+import { actFetchListCourseRegistered, actGetKeyword, actUnsubsCourseAdmin } from 'store/unsubscribeByUser/actions';
 
 export default function UnsubscribeByUserPage(props) {
-  const { loading } = useSelector(state => state.courseListRegisteredReducer);
   let { data } = useSelector(state => state.courseListRegisteredReducer);
-  const { error } = useSelector(state => state.courseListRegisteredReducer);
   const { keyword } = useSelector(state => state.courseListRegisteredReducer);
 
   const { account } = props.match.params;

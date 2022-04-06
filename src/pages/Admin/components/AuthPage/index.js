@@ -1,6 +1,7 @@
+import Loading from 'components/Loading';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actAuth } from '../../../../store/auth/actions';
+import { actAuth } from 'store/auth/actions';
 import "./_auth.scss";
 import "./_util.scss"
 
@@ -32,7 +33,7 @@ export default function AuthPage(props) {
   }
 
   if(loading){
-    return (<div>...loading</div>)
+    return (<Loading />)
   }
 
   return (

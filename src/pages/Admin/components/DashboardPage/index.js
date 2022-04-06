@@ -3,8 +3,6 @@ import "@material-tailwind/react/tailwind.css";
 import "../_component/style/tailwind.css";
 import 'material-icons/iconfont/material-icons.css';
 import ChartBar from '../_component/Dashboard/ChartBar';
-import PageVisitsCard from '../_component/Dashboard/PageVisitsCard';
-import TrafficCard from '../_component/Dashboard/TrafficCard';
 import StatusCard from '../_component/Dashboard/StatusCard';
 import ChartLine from '../_component/Dashboard/ChartLine';
 

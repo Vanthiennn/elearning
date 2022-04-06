@@ -5,7 +5,7 @@ import {
   Select,
 } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { actEditUserAdmin, actGetInfoUserAdmin } from '../../../../store/editUserAdmin/actions';
+import { actEditUserAdmin, actGetInfoUserAdmin } from 'store/editUserAdmin/actions';
 import { groupID } from 'utils/apiUtils';
 
 export default function EditUserPage(props) {

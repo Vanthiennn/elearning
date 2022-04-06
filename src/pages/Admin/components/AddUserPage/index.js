@@ -4,9 +4,9 @@ import {
   Input,
   Select,
 } from 'antd';
-import { actAddUserAdmin } from '../../../../store/addUserAdmin/actions';
+import { actAddUserAdmin } from 'store/addUserAdmin/actions';
 import { useSelector, useDispatch } from 'react-redux';
-import { actListUserAdmin } from "../../../../store/userAdmin/actions";
+import { actListUserAdmin } from "store/userAdmin/actions";
 import { groupID } from 'utils/apiUtils';
 
 const AddUserPage = (props) => {

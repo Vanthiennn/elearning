@@ -4,12 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import Search from 'antd/lib/transfer/search';
 import { NavLink } from "react-router-dom"
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import { actFetchListUserWaitApproval, actGetKeyword, actRegisterCourse, actUnsubsCourseAdmin } from '../../../../store/approvalUser/actions';
+import { actFetchListUserWaitApproval, actGetKeyword, actRegisterCourse, actUnsubsCourseAdmin } from 'store/approvalUser/actions';
 
 export default function ApprovalUserPage(props) {
-  const { loading } = useSelector(state => state.userListWaitApprovalReducer);
   let { data } = useSelector(state => state.userListWaitApprovalReducer);
-  const { error } = useSelector(state => state.userListWaitApprovalReducer);
   const { keyword } = useSelector(state => state.userListWaitApprovalReducer);
 
   const [courseId, SetCourseId] = useState({

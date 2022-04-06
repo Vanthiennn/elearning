@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { actDeleteCourseAdmin, actFetchListCourseAdmin } from '../../../../store/courseAdmin/actions';
+import { actDeleteCourseAdmin, actFetchListCourseAdmin } from 'store/courseAdmin/actions';
 import { Button, Table, Image } from 'antd';
 import { NavLink } from 'react-router-dom';
 import { EditOutlined, DeleteOutlined, UsergroupAddOutlined, UsergroupDeleteOutlined, SafetyCertificateOutlined } from "@ant-design/icons";
 import { Input } from 'antd';
+import Loading from 'components/Loading';
 
 export default function CoursePage(props) {
   const loading = useSelector(state => state.listCourseReducer.loading);
@@ -165,7 +166,9 @@ export default function CoursePage(props) {
   };
 
   if (loading) {
-    return <div>...loading</div>
+    return (
+      <Loading />
+    )
   }
   if (error) {
     alert(error)

@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Button, Table } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import Search from 'antd/lib/transfer/search';
 import { NavLink } from "react-router-dom"
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import { actFetchListCoursaWaitApproval, actGetKeyword, actRegisterCourse, actUnsubsCourseAdmin } from '../../../../store/approvalCourse/actions';
+import { actFetchListCoursaWaitApproval, actGetKeyword, actRegisterCourse, actUnsubsCourseAdmin } from 'store/approvalCourse/actions';
 
 export default function ApprovalCoursePage(props) {
-  const { loading } = useSelector(state => state.courseListWaitApprovalReducer);
   let { data } = useSelector(state => state.courseListWaitApprovalReducer);
-  const { error } = useSelector(state => state.courseListWaitApprovalReducer);
   const { keyword } = useSelector(state => state.courseListWaitApprovalReducer);
 
   const {account} = props.match.params;

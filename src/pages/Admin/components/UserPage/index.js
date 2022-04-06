@@ -1,10 +1,11 @@
 import React, { useEffect, useState, memo } from 'react';
 import { Button, Table, Pagination } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { actDeleteUserAdmin, actListUserAdmin } from '../../../../store/userAdmin/actions';
+import { actDeleteUserAdmin, actListUserAdmin } from 'store/userAdmin/actions';
 import { NavLink } from "react-router-dom"
 import { EditOutlined, DeleteOutlined, UsergroupAddOutlined, UsergroupDeleteOutlined, SafetyCertificateOutlined } from "@ant-design/icons";
 import { Input, Space } from 'antd';
+import Loading from 'components/Loading';
 
 function UserPage(props) {
   const { loading } = useSelector(state => state.userListAdminReducer);
@@ -162,7 +163,7 @@ function UserPage(props) {
 
   if (loading) {
     return (
-      <div>...loading</div>
+      <Loading />
     )
   }
   return (

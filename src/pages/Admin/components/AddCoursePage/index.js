@@ -2,17 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   Form,
   Input,
-  Button,
   Radio,
   Select,
   DatePicker,
-  InputNumber,
 } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCourseCatalog } from '../../../../store/courseAdmin/actions';
-import { actListUserAdmin } from '../../../../store/userAdmin/actions';
+import { getCourseCatalog } from 'store/courseAdmin/actions';
+import { actListUserAdmin } from 'store/userAdmin/actions';
 import moment from 'moment';
-import { actAddCourseAdmin } from '../../../../store/addCourseAdmin/actions';
+import { actAddCourseAdmin } from 'store/addCourseAdmin/actions';
 import { groupID } from 'utils/apiUtils';
 
 const AddCoursePage = (props) => {
