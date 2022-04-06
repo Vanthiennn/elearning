@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { actListCoursesApi } from "store/listCourses/actions";
-import { addToCart as actAddToCarting } from "store/cart/actions"
+import { addToCart as actAddToCarting } from "store/cart/actions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGraduationCap,
@@ -13,10 +13,9 @@ import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import { useHistory } from "react-router-dom";
-import "./style.scss"
+import "./style.scss";
 
 export default function SuggestCourse(props) {
-  
   const goToTop = () => {
     window.scroll({
       top: 0,
@@ -27,26 +26,27 @@ export default function SuggestCourse(props) {
   const history = useHistory();
   const listCourses = useSelector(
     (state) => state.listCoursesReducer.listCourses
-    );
-    const cartItems = useSelector((state) => state.cartReducer.cartItems);
-  
-    const dispatch = useDispatch();
-    useEffect(() => {
+  );
+  const cartItems = useSelector((state) => state.cartReducer.cartItems);
+  const dispatch = useDispatch();
+  useEffect(() => {
     dispatch(actListCoursesApi());
   }, []);
 
   const addToCart = (item) => {
-    dispatch(actAddToCarting(item))
-  }
+    dispatch(actAddToCarting(item));
+  };
 
   const renderAddToCart = (items) => {
     return cartItems.findIndex((item) => {
-      return  item.maKhoaHoc === items.maKhoaHoc    ;
+      return item.maKhoaHoc === items.maKhoaHoc;
     }) === -1 ? (
-      <button className="add-cart" onClick={(e) => {
-        e.preventDefault()
-        addToCart(items)
-      }}>
+      <button
+        className="add-cart"
+        onClick={() => {
+          addToCart(items);
+        }}
+      >
         Add To Cart
       </button>
     ) : (
@@ -80,7 +80,7 @@ export default function SuggestCourse(props) {
                   <img
                     src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"
                     alt="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png?fit=256%2C256&quality=100&ssl=1"
-                    style={{ width: 25, height: 25,display:"inline-block" }}
+                    style={{ width: 25, height: 25, display: "inline-block" }}
                   />
                   <label>Teacher</label>
                   <p>{item.nguoiTao.hoTen}</p>
@@ -120,7 +120,7 @@ export default function SuggestCourse(props) {
               <div className="button-show-info">
                 <NavLink
                   className="detail"
-                  to={`/detail/${item.maKhoaHoc}`}
+                  to=""
                   onClick={(e) => {
                     e.preventDefault();
                     history.push(`/detail/${item.maKhoaHoc}?${item.fee}`);
@@ -130,7 +130,7 @@ export default function SuggestCourse(props) {
                 >
                   Detail
                 </NavLink>
-               {renderAddToCart(item)}
+                {renderAddToCart(item)}
               </div>
             </div>
           </div>
@@ -151,7 +151,7 @@ export default function SuggestCourse(props) {
         nav: true,
       },
       600: {
-        items:2,
+        items: 2,
         nav: false,
       },
       1200: {
@@ -165,7 +165,14 @@ export default function SuggestCourse(props) {
     <div className="my-5">
       <h3>You might also like</h3>
 
-      <OwlCarousel {...setting} nav className="owl-theme" key={listCourses.length}>{renderSuggestCourse()}</OwlCarousel>
+      <OwlCarousel
+        {...setting}
+        nav
+        className="owl-theme"
+        key={listCourses.length}
+      >
+        {renderSuggestCourse()}
+      </OwlCarousel>
     </div>
   );
 }

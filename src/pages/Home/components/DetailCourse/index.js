@@ -13,7 +13,7 @@ import {
   faDollar,
   faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
-import SuggestCourse from "../../../../components/SuggestCourse";
+import SuggestCourse from "components/SuggestCourse";
 import { faReact } from "@fortawesome/free-brands-svg-icons";
 import "./style.scss";
 

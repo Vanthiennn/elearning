@@ -8,16 +8,14 @@ import {
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import React, { Fragment, useEffect, useState } from "react";
-import "./style.scss"
+import "./style.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import SuggestCourse from "components/SuggestCourse";
-
-
 import { actAllCourse, applyFilter } from "store/allCourse/actions";
-import { addToCart as actAddToCarting } from "store/cart/actions"
+import { addToCart as actAddToCarting } from "store/cart/actions";
 
-export default function AllCourse(props) { 
+export default function AllCourse(props) {
   const allCourse = useSelector((state) => state.allCourseReducer.allCourse);
   const infoUser = useSelector((state) => state.profileUserReducer.infoUser);
   const cartItems = useSelector((state) => state.cartReducer.cartItems);
@@ -40,16 +38,19 @@ export default function AllCourse(props) {
   };
 
   const addToCart = (item) => {
-    dispatch(actAddToCarting(item))
-  }
+    dispatch(actAddToCarting(item));
+  };
 
   const renderAddToCart = (items) => {
     return cartItems.findIndex((item) => {
-      return  item.maKhoaHoc === items.maKhoaHoc    ;
+      return item.maKhoaHoc === items.maKhoaHoc;
     }) === -1 ? (
-      <button className="add-cart" onClick={() => {
-        addToCart(items)
-      }}>
+      <button
+        className="add-cart"
+        onClick={() => {
+          addToCart(items);
+        }}
+      >
         Add To Cart
       </button>
     ) : (
@@ -59,28 +60,28 @@ export default function AllCourse(props) {
     );
   };
   const handleAddToCart = (items) => {
-  	return infoUser ? (
-  		infoUser.chiTietKhoaHocGhiDanh?.findIndex(item => {
-  			return item.maKhoaHoc === items.maKhoaHoc;
-  		}) === -1 ? (
-  			renderAddToCart(items)
-  		) : (
-  			<NavLink className="add-cart go-profile" to="/profile">
-  				Go to profile
-  			</NavLink>
-  		)
-  	) : (
-  		renderAddToCart(items)
-  	);
+    return infoUser.chiTietKhoaHocGhiDanh ? (
+      infoUser.chiTietKhoaHocGhiDanh?.findIndex((item) => {
+        return item.maKhoaHoc === items.maKhoaHoc;
+      }) === -1 ? (
+        renderAddToCart(items)
+      ) : (
+        <NavLink className="add-cart go-profile" to="/profile">
+          Go to profile
+        </NavLink>
+      )
+    ) : (
+      renderAddToCart(items)
+    );
   };
 
   const renderCoursePage = () => {
-    let { items: course } = allCourse
+    let { items: course } = allCourse;
     const { key } = keyWord;
-    const lowerCaseKey = key.toLowerCase()
+    const lowerCaseKey = key.toLowerCase();
     course = course.filter((item) => {
-      const lowerCaseKhoaHoc = item.tenKhoaHoc.toLowerCase()
-      const indexOfLowerCaseKhoaHoc = lowerCaseKhoaHoc.indexOf(lowerCaseKey)
+      const lowerCaseKhoaHoc = item.tenKhoaHoc.toLowerCase();
+      const indexOfLowerCaseKhoaHoc = lowerCaseKhoaHoc.indexOf(lowerCaseKey);
       return indexOfLowerCaseKhoaHoc !== -1;
     });
     return course.map((item, index) => {
@@ -98,7 +99,16 @@ export default function AllCourse(props) {
                     alt="image of admin"
                     style={{ width: 25, height: 25 }}
                   />
-                  <p style={{width:50,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{item.nguoiTao.hoTen}</p>
+                  <p
+                    style={{
+                      width: 50,
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {item.nguoiTao.hoTen}
+                  </p>
                 </div>
                 <div className="name-course w-75">
                   <p>{item.tenKhoaHoc}</p>
@@ -152,7 +162,7 @@ export default function AllCourse(props) {
       <Menu.Item
         key="0"
         onClick={() => {
-          dispatch(applyFilter('a-z', allCourse))
+          dispatch(applyFilter("a-z", allCourse));
         }}
       >
         A - Z
@@ -160,7 +170,7 @@ export default function AllCourse(props) {
       <Menu.Item
         key="1"
         onClick={() => {
-          dispatch(applyFilter('price:asc', allCourse))
+          dispatch(applyFilter("price:asc", allCourse));
         }}
       >
         Increasing Price
@@ -168,7 +178,7 @@ export default function AllCourse(props) {
       <Menu.Item
         key="3"
         onClick={() => {
-          dispatch(applyFilter('price:desc', allCourse))
+          dispatch(applyFilter("price:desc", allCourse));
         }}
       >
         Decreasing Price
@@ -176,28 +186,24 @@ export default function AllCourse(props) {
     </Menu>
   );
 
-  const renderPagi = ( pages ) => {
-    const items = []
-    for(let i = 1; i <= pages; i++) {
+  const renderPagi = (pages) => {
+    const items = [];
+    for (let i = 1; i <= pages; i++) {
       items.push(
-        <li key={ i }>
+        <li key={i}>
           <button
-            className={ i === currentPage ? 'active': '' }
+            className={i === currentPage ? "active" : ""}
             onClick={() => {
               changeCurrentPage(i);
             }}
           >
-            { i }
+            {i}
           </button>
         </li>
-      )
+      );
     }
-    return (
-      <ul className="pagination">
-        { items }
-      </ul>
-    )
-  }
+    return <ul className="pagination">{items}</ul>;
+  };
   return (
     <div className="py-5 all-course">
       <div className="background-course">
@@ -222,20 +228,17 @@ export default function AllCourse(props) {
           </Dropdown>
         </div>
         <div className="search">
-          <input
-            placeholder="Searching course"
-            onChange={handleOnChange}
-          />
+          <input placeholder="Searching course" onChange={handleOnChange} />
           <button type="submit">
             <FontAwesomeIcon icon={faSearch} />
           </button>
         </div>
       </div>
       <div className="content my-5">
-      <div className="row mx-0">{renderCoursePage()}</div>
-            { allCourse && allCourse.totalPages > 0 &&
-              renderPagi( allCourse.totalPages )
-            }
+        <div className="row mx-0">{renderCoursePage()}</div>
+        {allCourse &&
+          allCourse.totalPages > 0 &&
+          renderPagi(allCourse.totalPages)}
       </div>
       <SuggestCourse />
     </div>

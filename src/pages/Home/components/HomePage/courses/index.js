@@ -60,7 +60,8 @@ export default function Courses(props) {
     );
   };
   const handleAddToCart = (items) => {
-    return infoUser.chiTietKhoaHocGhiDanh?.findIndex((item) => {
+    return infoUser.chiTietKhoaHocGhiDanh ? 
+    infoUser.chiTietKhoaHocGhiDanh?.findIndex((item) => {
       return item.maKhoaHoc === items.maKhoaHoc;
     }) === -1 ? (
       renderAddToCart(items)
@@ -68,7 +69,7 @@ export default function Courses(props) {
       <NavLink className="add-cart go-profile" to="/profile">
         Go to profile
       </NavLink>
-    );
+    ) : renderAddToCart(items)
   };
 
   const renderListCourses = () => {
