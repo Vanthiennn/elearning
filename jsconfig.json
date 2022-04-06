@@ -3,9 +3,10 @@
     "baseUrl": "./src",
     "paths": {
       "component/*": ["./src/components/*"],
-      "container/*": ["./src/containers/*"],
+      "pages/*": ["./src/pages/*"],
       "routes/*": ["./src/routes/*"],
-      "utils/*": ["./src/utils/*"]
+      "utils/*": ["./src/utils/*"],
+      "store/*": ["./src/store/*"]
     }
   },
   "exclude": ["node_modules"]

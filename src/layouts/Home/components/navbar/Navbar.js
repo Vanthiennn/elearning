@@ -6,11 +6,15 @@ import { Space } from "antd";
 import { useSelector } from "react-redux";
 import _ from "lodash";
 
+
 export default function Navbar() {
   const [isNavOpen, setNavOpen] = useState(true);
   let location = useLocation();
   const { userLogin } = useSelector((state) => state.loginReducer);
-  const listCart = useSelector((state) => state.listCartReducer.listCart);
+  // const cart = useSelector((state) => state.cartReducer.cartItems);
+  const listCart = useSelector(state => state.cartReducer.cartItems)
+  const totalQuantity = useSelector(state => state.cartReducer.totalQuantity)
+
   const history = useHistory();
 
   const totalCart = () => {
@@ -127,11 +131,11 @@ export default function Navbar() {
             >
               <ShoppingCartOutlined />
             </Space>
-            <span className="cartNum">{listCart.length}</span>
+            <span className="cartNum">{totalQuantity}</span>
             <div className="listCart px-3 mobile">
-              {listCart.length === 0 ? (
+              {totalQuantity === 0 ? (
                 <div className="no-course">
-                  There are no courses in the cart
+                  Your cart is empty
                 </div>
               ) : (
                 <Fragment>
@@ -170,22 +174,40 @@ export default function Navbar() {
           >
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink
+                {_.isEmpty(userLogin) ?  <NavLink
                   activeClassName="active"
                   className="nav-link textNav textNavRes "
                   to="/login"
                 >
                   SIGN IN
-                </NavLink>
+                </NavLink>  : <NavLink
+                  activeClassName="active"
+                  className="nav-link textNav textNavRes "
+                  to="/profile"
+                >
+                  {userLogin.taiKhoan}
+                </NavLink>}
               </li>
               <li className="nav-item">
-                <NavLink
+                {_.isEmpty(userLogin) ? <NavLink
                   activeClassName="active"
                   className="nav-link textNav textNavRes "
                   to="/register"
                 >
                   REGISTER
-                </NavLink>
+                </NavLink> : <NavLink
+                  activeClassName="active"
+                  className="nav-link textNav textNavRes "
+                  to="/"
+                  onClick={() => {
+                    localStorage.removeItem("UserHome");
+                    history.push("/");
+                    window.location.reload();
+                  }}
+                >
+                  Log Out
+                </NavLink> }
+                
               </li>
               <li className="nav-item">
                 <NavLink
@@ -219,11 +241,11 @@ export default function Navbar() {
             >
               <ShoppingCartOutlined />
             </Space>
-            <span className="cartNum">{listCart.length}</span>
+            <span className="cartNum">{totalQuantity}</span>
             <div className="listCart px-3">
-              {listCart.length === 0 ? (
+              {totalQuantity === 0 ? (
                 <div className="no-course">
-                  There are no courses in the cart
+                  Your cart is empty
                 </div>
               ) : (
                 <Fragment>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { actDetailCourse } from "store/detailCourse/actions";
+import { addToCart as actAddToCarting } from "store/cart/actions"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStar,
@@ -14,7 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import SuggestCourse from "../../../../components/SuggestCourse";
 import { faReact } from "@fortawesome/free-brands-svg-icons";
-import "./style.scss"
+import "./style.scss";
 
 export default function DetailCourse(props) {
   const [state, setState] = useState({
@@ -23,12 +24,31 @@ export default function DetailCourse(props) {
   const detailCourse = useSelector(
     (state) => state.detailCourseReducer.detailCourse
   );
-  // console.log(listCourses))
+  const cartItems = useSelector((state) => state.cartReducer.cartItems);
+  const addToCart = (item) => {
+    dispatch(actAddToCarting(item))
+  }
+
+  const renderAddToCart = (items) => {
+    return cartItems.findIndex((item) => {
+      return  item.maKhoaHoc === items.maKhoaHoc    ;
+    }) === -1 ? (
+      <button className="add-cart" onClick={() => {
+        addToCart(items)
+      }}>
+        Add To Cart
+      </button>
+    ) : (
+      <NavLink className="add-cart go-cart" to={`/my-cart?${state.fee}`}>
+        Go To Cart
+      </NavLink>
+    );
+  };
 
   const dispatch = useDispatch();
   useEffect(() => {
-    let { maKhoaHoc } = props.match.params;
-    let { search } = props.location;
+    const { maKhoaHoc } = props.match.params;
+    const { search } = props.location;
     setState({
       fee: search.slice(1, search.length),
     });
@@ -41,7 +61,8 @@ export default function DetailCourse(props) {
         <div className="image-detail"></div>
         <div className="title-detail">
           <h3 className="text-white">{detailCourse.tenKhoaHoc}</h3>
-          <NavLink to="/">Home /</NavLink>
+          <NavLink to="/">Home </NavLink>{" "}
+          <span className="text-muted"> / </span> 
           <NavLink to={`/detail/${detailCourse.maKhoaHoc}?`}>
             {" "}
             Detail Course
@@ -50,7 +71,7 @@ export default function DetailCourse(props) {
       </div>
       <div className="content mx-5 pt-4">
         <div className="row mb-5">
-          <div className="col-sm-12 col-md-8">
+          <div className="col-sm-12 col-lg-8">
             <div className="name-course">
               {detailCourse.tenKhoaHoc}
               <span> {state.fee}$</span>
@@ -95,9 +116,7 @@ export default function DetailCourse(props) {
                 </div>
                 <div className="col-3">
                   <div className="item-content">
-                    <div className="content">
-                      <button className="buttonBlue">Add to cart </button>
-                    </div>
+                  {renderAddToCart(detailCourse)}
                   </div>
                 </div>
               </div>
@@ -106,39 +125,41 @@ export default function DetailCourse(props) {
               </div>
             </div>
           </div>
-          <div className="col-sm-12 col-md-4">
+          <div className="col-sm-12 col-lg-4 mt-3">
             <div className="detail-right">
-              <h3 className="text-center">
-                Info Course
-                
-              </h3>
+              <h3 className="text-center mb-5">Info Course</h3>
               <ul>
                 <li>
-                <FontAwesomeIcon className="icon-detail" icon={faReact} />  Course name: <span>{detailCourse.tenKhoaHoc}</span>
+                  <FontAwesomeIcon className="icon-detail" icon={faReact} />{" "}
+                  Course name: <span>{detailCourse.tenKhoaHoc}</span>
                 </li>
                 <li>
-                  <FontAwesomeIcon className="icon-detail" icon={faList} /> Category name:{" "}
+                  <FontAwesomeIcon className="icon-detail" icon={faList} />{" "}
+                  Category name:{" "}
                   <span>{detailCourse?.danhMucKhoaHoc?.tenDanhMucKhoaHoc}</span>
                 </li>
                 <li>
-                  <FontAwesomeIcon className="icon-detail" icon={faFlag} /> Description:{" "}
-                  <span>{detailCourse.moTa}</span>
+                  <FontAwesomeIcon className="icon-detail" icon={faFlag} />{" "}
+                  Description: <span>{detailCourse.moTa}</span>
                 </li>
                 <li>
-                  <FontAwesomeIcon className="icon-detail" icon={faClock} /> Date:{" "}
-                  <span>{detailCourse.ngayTao}</span>
+                  <FontAwesomeIcon className="icon-detail" icon={faClock} />{" "}
+                  Date: <span>{detailCourse.ngayTao}</span>
                 </li>
                 <li>
-                  <FontAwesomeIcon className="icon-detail" icon={faEye} /> Watch:{" "}
-                  <span>{detailCourse.luotXem}</span>
+                  <FontAwesomeIcon className="icon-detail" icon={faEye} />{" "}
+                  Watch: <span>{detailCourse.luotXem}</span>
                 </li>
                 <li>
-                  <FontAwesomeIcon className="icon-detail" icon={faGraduationCap} /> Student:{" "}
-                  <span> {detailCourse.soLuongHocVien}</span>
+                  <FontAwesomeIcon
+                    className="icon-detail"
+                    icon={faGraduationCap}
+                  />{" "}
+                  Student: <span> {detailCourse.soLuongHocVien}</span>
                 </li>
                 <li>
-                  <FontAwesomeIcon className="icon-detail" icon={faDollar} /> Fee:{" "}
-                  <span> {state.fee}</span>
+                  <FontAwesomeIcon className="icon-detail" icon={faDollar} />{" "}
+                  Fee: <span> {state.fee}</span>
                 </li>
               </ul>
             </div>

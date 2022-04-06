@@ -1,0 +1,6 @@
+export const ADD_TO_CART = '@cart/ADD_TO_CART'
+export const UPDATE_QUANTITY = '@cart/UPDATE_QUANTITY'
+export const REMOVE_FROM_CART = '@cart/REMOVE_FROM_CART'
+export const SET_LOADING = '@cart/SET_LOADING'
+export const RELOAD_CART = '@cart/RELOAD_CART'
+export const UPDATE_CART = '@cart/UPDATE_CART'

@@ -4,10 +4,19 @@ import { BrowserRouter , Route, Switch } from "react-router-dom";
 import PageNotFound from "pages/PageNotFound";
 import {renderRoutesHome,renderRoutesAdmin} from "./routes"
 import AuthPage from "pages/Admin/components/AuthPage";
+import Loading from "components/Loading";
+import { useEffect } from 'react'
+import { reloadCart } from "store/cart/actions"
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(reloadCart());
+  }, []);
   return (
-   <Suspense fallback={<div>Loading... </div>}>
+   <Suspense fallback={<Loading/>}>
      <BrowserRouter>
       <Switch>
         {renderRoutesHome()}

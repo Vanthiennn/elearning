@@ -29,6 +29,10 @@
       top: 50%;
       left: 6%;
       transform: translateY(-50%);
+      & a {
+        color: #227df9;
+        font-size: 17px;
+      }
     }
   }
   .arrange-search {
@@ -98,6 +102,15 @@
             border-radius: 10px;
             margin-top: 10px;
             color: white;
+            border: none;
+          }
+          & .go-cart {
+            background-color: black;
+            font-weight: 600;
+          }
+          & .go-profile {
+            background-color: #df3ef8;
+            font-weight: 600;
           }
         }
       }
