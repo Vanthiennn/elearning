@@ -1,0 +1,5 @@
+export const LIST_COURSE_UNSUBS_REQUEST = "@courseunsubs/LIST_COURSE_UNSUBS_REQUEST";
+export const LIST_COURSE_UNSUBS_SUCCESS = "@courseunsubs/LIST_COURSE_UNSUBS_SUCCESS";
+export const LIST_COURSE_UNSUBS_FAILED = "@courseunsubs/LIST_COURSE_UNSUBS_FAILED";
+
+export const GET_KEYWORD = "@search/GET_KEYWORD";

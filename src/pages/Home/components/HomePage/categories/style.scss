@@ -1,0 +1,63 @@
+.categories {
+    padding: 40px 100px;
+    & .wallpaper img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -999;
+      width: 100%;
+      text-align: center;
+    }
+    & .titleCategory {
+      overflow: hidden;
+    }
+    
+    & .container {
+      margin-top: 80px;
+      & .item-category {
+        position: relative;
+        max-width: 160px !important;
+        height: 160px;
+        
+        .overlay {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          z-index: 1;
+          background-color: rgba(0, 0, 0, 0.4);
+          border-radius: 20%;
+          transition: 0.3s ease;
+        }
+        .imageCategory,
+        .imageCategory img {
+          width: 100%;
+          height: 100%;
+        }
+        .imageCategory {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+        .textCategory {
+          color: white;
+          font-size: 13px;
+          position: absolute;
+          top: 50%;
+          z-index: 2;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-weight: 700 ;//$fw-4;
+          transition: 0.3s ease;
+        }
+        &:hover .overlay {
+          background-color: rgba(51, 23, 210, 0.5);
+        }
+      }
+    }
+  }
+  
+  
+  
+  
