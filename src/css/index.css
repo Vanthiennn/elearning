@@ -1,0 +1,76 @@
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Roboto', sans-serif;
+  background-color: white;
+  color: black;
+  font-size: 15px;
+  font-weight: 300;
+  text-decoration: none;
+  scroll-behavior: smooth;
+}
+
+.buttonBlue {
+  padding: 6px 12px;
+  background-color: #227df9;
+  color: #fff;
+  border: none;
+  opacity: 0.8;
+  -webkit-transition: .3s ease;
+  transition: .3s ease;
+}
+
+.buttonBlue:hover {
+  opacity: 1;
+}
+
+.buttonPink {
+  padding: 6px 12px;
+  background-color: #df3ef8;
+  color: #fff;
+  border: none;
+  opacity: 0.8;
+  -webkit-transition: .3s ease;
+  transition: .3s ease;
+}
+
+.buttonPink:hover {
+  opacity: 1;
+}
+
+.pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.pagination li {
+  padding: 0 15px;
+}
+
+.pagination button {
+  -webkit-transition: .2s ease;
+  transition: .2s ease;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  width: 30px;
+  height: 30px;
+}
+
+.pagination button.active, .pagination button:hover {
+  background-color: red;
+  color: white;
+}
+/*# sourceMappingURL=index.css.map */

@@ -69,7 +69,7 @@ export default function Courses(props) {
       <NavLink className="add-cart go-profile" to="/profile">
         Go to profile
       </NavLink>
-    ) : renderAddToCart(items)
+    ) : renderAddToCart(items)  
   };
 
   const renderListCourses = () => {

@@ -1,0 +1,44 @@
+.logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+.btnBackTo {
+  border: solid 1px;
+  background-color: #fff;
+  border-radius: 40px;
+  padding: 10px 20px;
+}
+
+.btnGoTo {
+  border: solid 1px;
+  background-color: #fff;
+  border-radius: 40px;
+  padding: 10px 20px;
+}
+
+.btnBackTo:hover {
+  border: solid 1px;
+  color: #fff;
+  background-color: #0069c0;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  border-radius: 40px;
+  padding: 10px 20px;
+}
+
+.btnGoTo:hover {
+  border: solid 1px;
+  color: #fff;
+  background-color: #00701a;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  border-radius: 40px;
+  padding: 10px 20px;
+}
+/*# sourceMappingURL=style.css.map */
